@@ -1,0 +1,264 @@
+code_group,code_type,code,label
+colectomy,CPT,1007468,"Colectomy, total, abdominal, with proctectomy"
+colectomy,CPT,1007463,"Colectomy, total, abdominal, without proctectomy"
+colectomy,CPT,44155,"Colectomy, total, abdominal, with proctectomy; with ileostomy"
+colectomy,CPT,44156,"Colectomy, total, abdominal, with proctectomy; with continent ileostomy"
+colectomy,CPT,44151,"Colectomy, total, abdominal, without proctectomy; with continent ileostomy"
+colectomy,CPT,44150,"Colectomy, total, abdominal, without proctectomy; with ileostomy or ileoproctostomy"
+colectomy,CPT,44212,"Laparoscopy, surgical; colectomy, total, abdominal, with proctectomy, with ileostomy"
+colectomy,CPT,44210,"Laparoscopy, surgical; colectomy, total, abdominal, without proctectomy, with ileostomy or ileoproctostomy"
+colectomy,CPT,44157,"Colectomy, total, abdominal, with proctectomy; with ileoanal anastomosis, includes loop ileostomy, and rectal mucosectomy, when performed"
+colectomy,CPT,44158,"Colectomy, total, abdominal, with proctectomy; with ileoanal anastomosis, creation of ileal reservoir (S or J), includes loop ileostomy, and rectal mucosectomy, when performed"
+colectomy,CPT,44211,"Laparoscopy, surgical; colectomy, total, abdominal, with proctectomy, with ileoanal anastomosis, creation of ileal reservoir (S or J), with loop ileostomy, includes rectal mucosectomy, when performed"
+mesalazine,RXNORM,199482,mesalamine 250 MG Delayed Release Oral Tablet
+mesalazine,RXNORM,833234,mesalamine 800 MG Delayed Release Oral Tablet
+mesalazine,RXNORM,314092,mesalamine 250 MG Extended Release Oral Capsule
+mesalazine,RXNORM,686429,mesalamine 1200 MG Delayed Release Oral Tablet
+mesalazine,RXNORM,825130,24 HR mesalamine 375 MG Extended Release Oral Capsule
+corticosteroids,RXNORM,8640,prednisone
+corticosteroids,RXNORM,1161706,prednisone Pill
+corticosteroids,RXNORM,316584,prednisone 5 MG
+corticosteroids,RXNORM,316582,prednisone 20 MG
+corticosteroids,RXNORM,335473,prednisone 2 MG
+corticosteroids,RXNORM,1161705,prednisone Oral Product
+corticosteroids,RXNORM,373583,prednisone Oral Solution
+corticosteroids,RXNORM,316586,prednisone 50 MG
+corticosteroids,RXNORM,316581,prednisone 2.5 MG
+corticosteroids,RXNORM,317475,prednisone 1 MG
+corticosteroids,RXNORM,373585,prednisone Oral Tablet
+corticosteroids,RXNORM,317663,prednisone 10 MG
+corticosteroids,RXNORM,1303136,prednisone 5 MG [Rayos]
+corticosteroids,RXNORM,92354,prednisone Oral Tablet [Deltasone]
+corticosteroids,RXNORM,316580,prednisone 1 MG/ML
+corticosteroids,RXNORM,316585,prednisone 5 MG/ML
+corticosteroids,RXNORM,1303133,prednisone 2 MG [Rayos]
+corticosteroids,RXNORM,1303127,prednisone 1 MG [Rayos]
+corticosteroids,RXNORM,567793,prednisone 20 MG [Deltasone]
+corticosteroids,RXNORM,1161704,prednisone Oral Liquid Product
+corticosteroids,RXNORM,312617,prednisone 5 MG Oral Tablet
+corticosteroids,RXNORM,198145,prednisone 10 MG Oral Tablet
+corticosteroids,RXNORM,312615,prednisone 20 MG Oral Tablet
+corticosteroids,RXNORM,198144,prednisone 1 MG Oral Tablet
+corticosteroids,RXNORM,198148,prednisone 50 MG Oral Tablet
+corticosteroids,RXNORM,198146,prednisone 2.5 MG Oral Tablet
+corticosteroids,RXNORM,1303124,prednisone Delayed Release Oral Tablet
+corticosteroids,RXNORM,205301,prednisone 5 MG/ML Oral Solution
+corticosteroids,RXNORM,1303128,prednisone Delayed Release Oral Tablet [Rayos]
+corticosteroids,RXNORM,315187,prednisone 1 MG/ML Oral Solution
+corticosteroids,RXNORM,206997,prednisone 20 MG Oral Tablet [Deltasone]
+corticosteroids,RXNORM,1303135,prednisone 5 MG Delayed Release Oral Tablet
+corticosteroids,RXNORM,1303132,prednisone 2 MG Delayed Release Oral Tablet
+corticosteroids,RXNORM,1303125,prednisone 1 MG Delayed Release Oral Tablet
+corticosteroids,RXNORM,1303134,prednisone 2 MG Delayed Release Oral Tablet [Rayos]
+corticosteroids,RXNORM,1303131,prednisone 1 MG Delayed Release Oral Tablet [Rayos]
+corticosteroids,RXNORM,1303137,prednisone 5 MG Delayed Release Oral Tablet [Rayos]
+corticosteroids,RXNORM,763185,predniSONE 10 MG Tablet 6 Day 21 Count Pack
+corticosteroids,RXNORM,763179,predniSONE 5 MG Tablet 12 Day 48 Count Pack
+corticosteroids,RXNORM,763183,predniSONE 10 MG Tablet 12 Day 48 Count Pack
+corticosteroids,RXNORM,763181,predniSONE 5 MG Tablet 6 Day 21 Count Pack
+corticosteroids,RXNORM,6902,methylprednisolone
+corticosteroids,RXNORM,1163489,methylprednisolone Pill
+corticosteroids,RXNORM,62136,methylprednisolone aceponate
+corticosteroids,RXNORM,155323,methylprednisolone acetate
+corticosteroids,RXNORM,1008080,aspirin / methylprednisolone
+corticosteroids,RXNORM,106991,lidocaine / methylprednisolone
+corticosteroids,RXNORM,1743703,methylprednisolone Injection
+corticosteroids,RXNORM,203189,methylprednisolone sodium succinate
+corticosteroids,RXNORM,1743725,methylprednisolone 1000 MG
+corticosteroids,RXNORM,330037,methylprednisolone 40 MG
+corticosteroids,RXNORM,1163486,methylprednisolone Injectable Product
+corticosteroids,RXNORM,317427,methylprednisolone 4 MG
+corticosteroids,RXNORM,376656,methylprednisolone Injectable Solution
+corticosteroids,RXNORM,1744013,methylprednisolone 2000 MG
+corticosteroids,RXNORM,372866,methylprednisolone Injectable Suspension
+corticosteroids,RXNORM,316285,methylprednisolone 2 MG
+corticosteroids,RXNORM,317426,methylprednisolone 16 MG
+corticosteroids,RXNORM,29917,methylprednisolone sodium phosphate
+corticosteroids,RXNORM,1163488,methylprednisolone Oral Product
+corticosteroids,RXNORM,332216,methylprednisolone 100 MG
+corticosteroids,RXNORM,1743719,methylprednisolone 500 MG
+corticosteroids,RXNORM,372868,methylprednisolone Oral Tablet
+corticosteroids,RXNORM,316288,methylprednisolone 8 MG
+corticosteroids,RXNORM,1743702,methylprednisolone 125 MG
+corticosteroids,RXNORM,316287,methylprednisolone 32 MG
+corticosteroids,RXNORM,346173,methylprednisolone 62.5 MG/ML
+corticosteroids,RXNORM,1358497,lidocaine / methylprednisolone Injectable Suspension
+corticosteroids,RXNORM,1743720,methylprednisolone 500 MG Injection
+corticosteroids,RXNORM,1743706,methylprednisolone Injection [Solu-Medrol]
+corticosteroids,RXNORM,311659,methylprednisolone 40 MG Injection
+corticosteroids,RXNORM,1743780,methylprednisolone Injection [Depo-Medrol]
+corticosteroids,RXNORM,1164046,lidocaine / methylprednisolone Injectable Product
+corticosteroids,RXNORM,567932,methylprednisolone 32 MG [Medrol]
+corticosteroids,RXNORM,567928,methylprednisolone 8 MG [Medrol]
+corticosteroids,RXNORM,1743704,methylprednisolone 125 MG Injection
+corticosteroids,RXNORM,1357886,methylprednisolone 2000 MG Injection
+corticosteroids,RXNORM,1743726,methylprednisolone 1000 MG Injection
+corticosteroids,RXNORM,567929,methylprednisolone 16 MG [Medrol]
+corticosteroids,RXNORM,1744021,methylprednisolone Injection [A-MethaPred]
+corticosteroids,RXNORM,567927,methylprednisolone 2 MG [Medrol]
+corticosteroids,RXNORM,574125,methylprednisolone 4 MG [Medrol]
+corticosteroids,RXNORM,368772,methylprednisolone Oral Tablet [Medrol]
+corticosteroids,RXNORM,1358509,methylprednisolone acetate 20 MG/ML
+corticosteroids,RXNORM,1744015,methylprednisolone 2000 MG [Solu-Medrol]
+corticosteroids,RXNORM,197969,methylprednisolone 2 MG Oral Tablet
+corticosteroids,RXNORM,1358496,methylprednisolone acetate 40 MG/ML
+corticosteroids,RXNORM,1744018,methylprednisolone 40 MG [Solu-Medrol]
+corticosteroids,RXNORM,365570,methylprednisolone Injectable Suspension [Depo-Medrol]
+corticosteroids,RXNORM,1743727,methylprednisolone 1000 MG [Solu-Medrol]
+corticosteroids,RXNORM,362772,methylprednisolone Injectable Solution [Solu-Medrol]
+corticosteroids,RXNORM,199771,methylprednisolone 100 MG Oral Tablet
+corticosteroids,RXNORM,259966,methylprednisolone 4 MG Oral Tablet
+corticosteroids,RXNORM,328161,methylprednisolone 16 MG Oral Tablet
+corticosteroids,RXNORM,1743705,methylprednisolone 125 MG [Solu-Medrol]
+corticosteroids,RXNORM,1744020,methylprednisolone 40 MG [A-MethaPred]
+corticosteroids,RXNORM,1358616,methylprednisolone acetate 80 MG/ML
+corticosteroids,RXNORM,1743721,methylprednisolone 500 MG [Solu-Medrol]
+corticosteroids,RXNORM,1744024,methylprednisolone 125 MG [A-MethaPred]
+corticosteroids,RXNORM,197971,methylprednisolone 32 MG Oral Tablet
+corticosteroids,RXNORM,197973,methylprednisolone 8 MG Oral Tablet
+corticosteroids,RXNORM,1100385,methylprednisolone acetate 0.01 MG/MG
+corticosteroids,RXNORM,1357888,methylprednisolone 2000 MG Injection [Solu-Medrol]
+corticosteroids,RXNORM,260330,methylprednisolone 4 MG Oral Tablet [Medrol]
+corticosteroids,RXNORM,207191,methylprednisolone 40 MG Injection [Solu-Medrol]
+corticosteroids,RXNORM,207138,methylprednisolone 16 MG Oral Tablet [Medrol]
+corticosteroids,RXNORM,207190,methylprednisolone 40 MG Injection [A-MethaPred]
+corticosteroids,RXNORM,207137,methylprednisolone 8 MG Oral Tablet [Medrol]
+corticosteroids,RXNORM,207192,methylprednisolone 125 MG Injection [A-MethaPred]
+corticosteroids,RXNORM,1100389,methylprednisolone acetate 0.01 MG/MG [HybriSil]
+corticosteroids,RXNORM,314099,methylprednisolone 62.5 MG/ML Injectable Solution
+corticosteroids,RXNORM,1743729,methylprednisolone 1000 MG Injection [Solu-Medrol]
+corticosteroids,RXNORM,207141,methylprednisolone 32 MG Oral Tablet [Medrol]
+corticosteroids,RXNORM,567984,methylprednisolone 62.5 MG/ML [Solu-Medrol]
+corticosteroids,RXNORM,1743707,methylprednisolone 125 MG Injection [Solu-Medrol]
+corticosteroids,RXNORM,207136,methylprednisolone 2 MG Oral Tablet [Medrol]
+corticosteroids,RXNORM,1743722,methylprednisolone 500 MG Injection [Solu-Medrol]
+corticosteroids,RXNORM,1358510,methylprednisolone acetate 20 MG/ML Injectable Suspension
+corticosteroids,RXNORM,1358611,methylprednisolone acetate 40 MG/ML [Depo-Medrol]
+corticosteroids,RXNORM,1358610,methylprednisolone acetate 40 MG/ML Injectable Suspension
+corticosteroids,RXNORM,1358511,methylprednisolone acetate 20 MG/ML [Depo-Medrol]
+corticosteroids,RXNORM,1358617,methylprednisolone acetate 80 MG/ML Injectable Suspension
+corticosteroids,RXNORM,1358618,methylprednisolone acetate 80 MG/ML [Depo-Medrol]
+corticosteroids,RXNORM,1743779,1 ML methylprednisolone acetate 40 MG/ML Injection
+corticosteroids,RXNORM,207193,methylprednisolone 62.5 MG/ML Injectable Solution [Solu-Medrol]
+corticosteroids,RXNORM,1743855,1 ML methylprednisolone acetate 80 MG/ML Injection
+corticosteroids,RXNORM,762675,methylPREDNISolone 4 MG Tablet 6 Day 21 Count Pack
+corticosteroids,RXNORM,1358612,methylprednisolone acetate 40 MG/ML Injectable Suspension [Depo-Medrol]
+corticosteroids,RXNORM,1358512,methylprednisolone acetate 20 MG/ML Injectable Suspension [Depo-Medrol]
+corticosteroids,RXNORM,1358619,methylprednisolone acetate 80 MG/ML Injectable Suspension [Depo-Medrol]
+corticosteroids,RXNORM,1743781,1 ML methylprednisolone acetate 40 MG/ML Injection [Depo-Medrol]
+corticosteroids,RXNORM,1743856,1 ML methylprednisolone acetate 80 MG/ML Injection [Depo-Medrol]
+corticosteroids,RXNORM,1358498,lidocaine hydrochloride 10 MG/ML / methylprednisolone acetate 40 MG/ML Injectable Suspension
+corticosteroids,RXNORM,834023,Medrol Dosepak 4 MG Tablet 6 Day 21 Count Pack
+corticosteroids,RXNORM,19831,budesonide
+corticosteroids,RXNORM,1151339,budesonide Pill
+corticosteroids,RXNORM,389132,budesonide / formoterol
+corticosteroids,RXNORM,2269303,budesonide 6 MG
+corticosteroids,RXNORM,1366548,budesonide 9 MG
+corticosteroids,RXNORM,1151338,budesonide Oral Product
+corticosteroids,RXNORM,332685,budesonide 3 MG
+corticosteroids,RXNORM,2108301,budesonide 0.2 MG
+corticosteroids,RXNORM,346148,budesonide 0.25 MG/ML
+corticosteroids,RXNORM,350723,budesonide 0.125 MG/ML
+corticosteroids,RXNORM,2273109,budesonide 9 MG [Ortikos]
+corticosteroids,RXNORM,393399,budesonide 0.08 MG/ACTUAT
+corticosteroids,RXNORM,1366552,budesonide 9 MG [Uceris]
+corticosteroids,RXNORM,991399,budesonide 3 MG [Entocort]
+corticosteroids,RXNORM,332687,budesonide 0.05 MG/ACTUAT
+corticosteroids,RXNORM,1596771,budesonide 2 MG/ACTUAT
+corticosteroids,RXNORM,692474,budesonide 0.18 MG/ACTUAT
+corticosteroids,RXNORM,692476,budesonide 0.09 MG/ACTUAT
+corticosteroids,RXNORM,2273103,budesonide 6 MG [Ortikos]
+corticosteroids,RXNORM,332686,budesonide 0.1 MG/ACTUAT
+corticosteroids,RXNORM,393396,budesonide 0.16 MG/ACTUAT
+corticosteroids,RXNORM,315498,budesonide 0.032 MG/ACTUAT
+corticosteroids,RXNORM,358545,budesonide 0.5 MG/ML
+corticosteroids,RXNORM,566387,budesonide 0.032 MG/ACTUAT [Rhinocort]
+corticosteroids,RXNORM,1366549,budesonide Extended Release Oral Tablet
+corticosteroids,RXNORM,1596774,budesonide 2 MG/ACTUAT [Uceris]
+corticosteroids,RXNORM,2269304,budesonide Extended Release Oral Capsule
+corticosteroids,RXNORM,616829,budesonide 0.125 MG/ML [Pulmicort]
+corticosteroids,RXNORM,1745530,budesonide 0.18 MG/ACTUAT [Pulmicort]
+corticosteroids,RXNORM,616816,budesonide 0.25 MG/ML [Pulmicort]
+corticosteroids,RXNORM,1489770,budesonide Delayed Release Oral Capsule
+corticosteroids,RXNORM,616818,budesonide 0.5 MG/ML [Pulmicort]
+corticosteroids,RXNORM,1745541,budesonide 0.09 MG/ACTUAT [Pulmicort]
+corticosteroids,RXNORM,2273104,budesonide Extended Release Oral Capsule [Ortikos]
+corticosteroids,RXNORM,1366553,budesonide Extended Release Oral Tablet [Uceris]
+corticosteroids,RXNORM,1489772,budesonide Delayed Release Oral Capsule [Entocort]
+corticosteroids,RXNORM,1244214,budesonide 3 MG Delayed Release Oral Capsule
+corticosteroids,RXNORM,1244215,budesonide 3 MG Delayed Release Oral Capsule [Entocort]
+corticosteroids,RXNORM,2269305,24 HR budesonide 6 MG Extended Release Oral Capsule
+corticosteroids,RXNORM,2269307,24 HR budesonide 9 MG Extended Release Oral Capsule
+corticosteroids,RXNORM,1366550,24 HR budesonide 9 MG Extended Release Oral Tablet
+corticosteroids,RXNORM,2273110,24 HR budesonide 9 MG Extended Release Oral Capsule [Ortikos]
+corticosteroids,RXNORM,2273107,24 HR budesonide 6 MG Extended Release Oral Capsule [Ortikos]
+corticosteroids,RXNORM,1366556,24 HR budesonide 9 MG Extended Release Oral Tablet [Uceris]
+biologics,RXNORM,191831,infliximab
+biologics,RXNORM,1790539,infliximab-dyyb
+biologics,RXNORM,1927283,infliximab-abda
+biologics,RXNORM,2103476,infliximab-qbtx
+biologics,RXNORM,1655941,infliximab Injection
+biologics,RXNORM,2266523,infliximab-axxq
+biologics,RXNORM,1790544,infliximab Injection [Inflectra]
+biologics,RXNORM,2266528,infliximab Injection [Avsola]
+biologics,RXNORM,1160692,infliximab Injectable Product
+biologics,RXNORM,1655940,infliximab 100 MG
+biologics,RXNORM,1655944,infliximab Injection [Remicade]
+biologics,RXNORM,1927288,infliximab Injection [Renflexis]
+biologics,RXNORM,1927284,infliximab-abda 100 MG
+biologics,RXNORM,310994,infliximab 100 MG Injection
+biologics,RXNORM,1790540,infliximab-dyyb 100 MG
+biologics,RXNORM,1655943,infliximab 100 MG [Remicade]
+biologics,RXNORM,2266524,infliximab-axxq 100 MG
+biologics,RXNORM,1927285,infliximab-abda 100 MG Injection
+biologics,RXNORM,213361,infliximab 100 MG Injection [Remicade]
+biologics,RXNORM,2266527,infliximab-axxq 100 MG [Avsola]
+biologics,RXNORM,1790541,infliximab-dyyb 100 MG Injection
+biologics,RXNORM,1790543,infliximab-dyyb 100 MG [Inflectra]
+biologics,RXNORM,2266525,infliximab-axxq 100 MG Injection
+biologics,RXNORM,1927287,infliximab-abda 100 MG [Renflexis]
+biologics,RXNORM,2266530,infliximab-axxq 100 MG Injection [Avsola]
+biologics,RXNORM,1927290,infliximab-abda 100 MG Injection [Renflexis]
+biologics,RXNORM,1790546,infliximab-dyyb 100 MG Injection [Inflectra]
+biologics,RXNORM,847083,ustekinumab
+biologics,RXNORM,1654076,ustekinumab Injection
+biologics,RXNORM,853349,ustekinumab Prefilled Syringe
+biologics,RXNORM,1163983,ustekinumab Injectable Product
+biologics,RXNORM,1654078,ustekinumab Injection [Stelara]
+biologics,RXNORM,853353,ustekinumab Prefilled Syringe [Stelara]
+biologics,RXNORM,1811254,ustekinumab 5 MG/ML
+biologics,RXNORM,853348,ustekinumab 90 MG/ML
+biologics,RXNORM,853352,ustekinumab 90 MG/ML [Stelara]
+biologics,RXNORM,1811256,ustekinumab 5 MG/ML [Stelara]
+biologics,RXNORM,1538097,vedolizumab
+biologics,RXNORM,1656996,vedolizumab Injection
+biologics,RXNORM,1656995,vedolizumab 300 MG
+biologics,RXNORM,1538135,vedolizumab Injectable Product
+biologics,RXNORM,1656999,vedolizumab Injection [Entyvio]
+biologics,RXNORM,1656998,vedolizumab 300 MG [Entyvio]
+biologics,RXNORM,1538137,vedolizumab 300 MG Injection
+biologics,RXNORM,1538142,vedolizumab 300 MG Injection [Entyvio]
+biologics,RXNORM,327361,adalimumab
+biologics,RXNORM,2103479,adalimumab-atto
+biologics,RXNORM,1656695,adalimumab Injection
+biologics,RXNORM,2103477,adalimumab-adbm
+biologics,RXNORM,1655725,adalimumab Auto-Injector
+biologics,RXNORM,727702,adalimumab Prefilled Syringe
+biologics,RXNORM,1163691,adalimumab Injectable Product
+biologics,RXNORM,1726843,adalimumab 100 MG/ML
+biologics,RXNORM,727704,adalimumab Prefilled Syringe [Humira]
+biologics,RXNORM,358817,adalimumab 50 MG/ML
+biologics,RXNORM,1655727,adalimumab Auto-Injector [Humira]
+biologics,RXNORM,1726845,adalimumab 100 MG/ML [Humira]
+biologics,RXNORM,576023,adalimumab 50 MG/ML [Humira]
+biologics,RXNORM,1656703,adalimumab starter pack 40 MG/0.8 ML Pen (6 count)
+biologics,RXNORM,1872985,adalimumab starter pack 40 MG/0.4 ML Pen (4 count)
+biologics,RXNORM,2531133,adalimumab starter pack 80 MG/0.8 ML Pen (4 count)
+biologics,RXNORM,1872983,adalimumab starter pack 40 MG/0.4 ML Pen (6 count)
+biologics,RXNORM,1801277,adalimumab starter pack 40 MG/0.8 ML Pen (4 count)
+biologics,RXNORM,1921244,adalimumab starter pack 80 MG/0.8 mL Auto-Injector (3 count)
+biologics,RXNORM,1873086,adalimumab pediatric starter pack 80 MG/0.8 ML Prefilled Syringe (3 count)
+biologics,RXNORM,1594357,adalimumab pediatric starter pack 40 MG/0.8 ML Prefilled Syringe (3 count)
+biologics,RXNORM,825169,adalimumab pediatric starter pack 40 MG/0.8 ML Prefilled Syringe (6 count)
+biologics,RXNORM,1921467,adalimumab starter pack 80 MG/0.8 mL and 40 MG/0.4 mL Auto-Injector (3 count)
+biologics,RXNORM,1855526,adalimumab pediatric starter pack 80 MG/0.8 ML and 40 MG/0.4 ML Prefilled Syringe (2 count)
