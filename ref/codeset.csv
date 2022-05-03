@@ -262,3 +262,90 @@ biologics,RXNORM,1594357,adalimumab pediatric starter pack 40 MG/0.8 ML Prefille
 biologics,RXNORM,825169,adalimumab pediatric starter pack 40 MG/0.8 ML Prefilled Syringe (6 count)
 biologics,RXNORM,1921467,adalimumab starter pack 80 MG/0.8 mL and 40 MG/0.4 mL Auto-Injector (3 count)
 biologics,RXNORM,1855526,adalimumab pediatric starter pack 80 MG/0.8 ML and 40 MG/0.4 ML Prefilled Syringe (2 count)
+immunomodulator,RXNORM,6851,methotrexate
+immunomodulator,RXNORM,1655955,methotrexate Injection
+immunomodulator,RXNORM,287734,methotrexate sodium
+immunomodulator,RXNORM,1162237,methotrexate Pill
+immunomodulator,RXNORM,1162235,methotrexate Injectable Product
+immunomodulator,RXNORM,2377332,methotrexate Prefilled Syringe
+immunomodulator,RXNORM,372836,methotrexate Oral Tablet
+immunomodulator,RXNORM,331569,methotrexate 15 MG
+immunomodulator,RXNORM,332454,methotrexate 5 MG
+immunomodulator,RXNORM,331568,methotrexate 10 MG
+immunomodulator,RXNORM,1655203,methotrexate Auto-Injector
+immunomodulator,RXNORM,1162236,methotrexate Oral Product
+immunomodulator,RXNORM,328407,methotrexate 2.5 MG
+immunomodulator,RXNORM,372835,methotrexate Injectable Solution
+immunomodulator,RXNORM,1656681,methotrexate 1000 MG
+immunomodulator,RXNORM,332455,methotrexate 7.5 MG
+immunomodulator,RXNORM,1921591,methotrexate Oral Solution
+immunomodulator,RXNORM,1655252,methotrexate Auto-Injector [Rasuvo]
+immunomodulator,RXNORM,1747178,methotrexate 31.3 MG/ML
+immunomodulator,RXNORM,1921595,methotrexate Oral Solution [Xatmep]
+immunomodulator,RXNORM,1747191,methotrexate 56.3 MG/ML
+immunomodulator,RXNORM,2377336,methotrexate Prefilled Syringe [Reditrex]
+immunomodulator,RXNORM,368138,methotrexate Oral Tablet [Trexall]
+immunomodulator,RXNORM,1441410,methotrexate 37.5 MG/ML
+immunomodulator,RXNORM,328406,methotrexate 25 MG/ML
+immunomodulator,RXNORM,1441421,methotrexate 62.5 MG/ML
+immunomodulator,RXNORM,575022,methotrexate 15 MG [Trexall]
+immunomodulator,RXNORM,328404,methotrexate 50 MG/ML
+immunomodulator,RXNORM,1747184,methotrexate 43.8 MG/ML
+immunomodulator,RXNORM,330028,methotrexate 2.5 MG/ML
+immunomodulator,RXNORM,575021,methotrexate 7.5 MG [Trexall]
+immunomodulator,RXNORM,1655205,methotrexate Auto-Injector [Otrexup]
+immunomodulator,RXNORM,360547,methotrexate 100 MG/ML
+immunomodulator,RXNORM,1921590,methotrexate Oral Liquid Product
+immunomodulator,RXNORM,575020,methotrexate 10 MG [Trexall]
+immunomodulator,RXNORM,575019,methotrexate 5 MG [Trexall]
+immunomodulator,RXNORM,311625,methotrexate 1000 MG Injection
+immunomodulator,RXNORM,105586,methotrexate 10 MG Oral Tablet
+immunomodulator,RXNORM,1921594,methotrexate 2.5 MG/ML [Xatmep]
+immunomodulator,RXNORM,1747186,methotrexate 43.8 MG/ML [Otrexup]
+immunomodulator,RXNORM,1441404,methotrexate 25 MG/ML [Otrexup]
+immunomodulator,RXNORM,1544380,methotrexate 50 MG/ML [Rasuvo]
+immunomodulator,RXNORM,1441423,methotrexate 62.5 MG/ML [Otrexup]
+immunomodulator,RXNORM,1441412,methotrexate 37.5 MG/ML [Otrexup]
+immunomodulator,RXNORM,283510,methotrexate 15 MG Oral Tablet
+immunomodulator,RXNORM,2377335,methotrexate 25 MG/ML [Reditrex]
+immunomodulator,RXNORM,1747180,methotrexate 31.3 MG/ML [Otrexup]
+immunomodulator,RXNORM,1747193,methotrexate 56.3 MG/ML [Otrexup]
+immunomodulator,RXNORM,283511,methotrexate 5 MG Oral Tablet
+immunomodulator,RXNORM,1441417,methotrexate 50 MG/ML [Otrexup]
+immunomodulator,RXNORM,105585,methotrexate 2.5 MG Oral Tablet
+immunomodulator,RXNORM,283671,methotrexate 7.5 MG Oral Tablet
+immunomodulator,RXNORM,105589,methotrexate 100 MG/ML Injectable Solution
+immunomodulator,RXNORM,284595,methotrexate 15 MG Oral Tablet [Trexall]
+immunomodulator,RXNORM,284593,methotrexate 10 MG Oral Tablet [Trexall]
+immunomodulator,RXNORM,1921592,methotrexate 2.5 MG/ML Oral Solution
+immunomodulator,RXNORM,284592,methotrexate 5 MG Oral Tablet [Trexall]
+immunomodulator,RXNORM,284594,methotrexate 7.5 MG Oral Tablet [Trexall]
+immunomodulator,RXNORM,315148,methotrexate 2.5 MG/ML Injectable Solution
+immunomodulator,RXNORM,1946772,methotrexate 25 MG/ML Injectable Solution
+immunomodulator,RXNORM,1921598,methotrexate 2.5 MG/ML Oral Solution [Xatmep]
+immunomodulator,RXNORM,1256,azathioprine
+immunomodulator,RXNORM,1155002,azathioprine Pill
+immunomodulator,RXNORM,1789839,azathioprine Injection
+immunomodulator,RXNORM,267476,azathioprine sodium
+immunomodulator,RXNORM,1155000,azathioprine Injectable Product
+immunomodulator,RXNORM,360266,azathioprine 100 MG
+immunomodulator,RXNORM,1155001,azathioprine Oral Product
+immunomodulator,RXNORM,385562,azathioprine 10 MG
+immunomodulator,RXNORM,329313,azathioprine 25 MG
+immunomodulator,RXNORM,370973,azathioprine Oral Tablet
+immunomodulator,RXNORM,315447,azathioprine 50 MG
+immunomodulator,RXNORM,360265,azathioprine 75 MG
+immunomodulator,RXNORM,564120,azathioprine 50 MG [Imuran]
+immunomodulator,RXNORM,576426,azathioprine 75 MG [Azasan]
+immunomodulator,RXNORM,239983,azathioprine 100 MG Injection
+immunomodulator,RXNORM,405819,azathioprine Oral Tablet [Azasan]
+immunomodulator,RXNORM,368214,azathioprine Oral Tablet [Imuran]
+immunomodulator,RXNORM,576427,azathioprine 100 MG [Azasan]
+immunomodulator,RXNORM,359229,azathioprine 75 MG Oral Tablet
+immunomodulator,RXNORM,197388,azathioprine 50 MG Oral Tablet
+immunomodulator,RXNORM,199310,azathioprine 25 MG Oral Tablet
+immunomodulator,RXNORM,359228,azathioprine 100 MG Oral Tablet
+immunomodulator,RXNORM,153129,azathioprine 10 MG Oral Tablet
+immunomodulator,RXNORM,404475,azathioprine 75 MG Oral Tablet [Azasan]
+immunomodulator,RXNORM,404476,azathioprine 100 MG Oral Tablet [Azasan]
+immunomodulator,RXNORM,105611,azathioprine 50 MG Oral Tablet [Imuran]
