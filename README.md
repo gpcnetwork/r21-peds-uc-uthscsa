@@ -1,11 +1,11 @@
 # Predicting Outcomes for Children with Ulcerative Colitis
 
-Funding agency: NIH/NIDDK
-Funding period: 07/2021 - 06/2023
-PI: Wang Zhu (UTHSCSA)
-Co-I: Xing Song (MU); Jeffrey Hyams (UTHSCSA)
-NIH RePORT site: https://reporter.nih.gov/search/kLDROKswLEKLHUQDAltx2w/project-details/10286334 
-DROC request: #95
+Funding agency: NIH/NIDDK <br/>
+Funding period: 07/2021 - 06/2023 <br/>
+PI: Wang Zhu (UTHSCSA) <br/>
+Co-I: Xing Song (MU); Jeffrey Hyams (UTHSCSA) <br/>
+NIH RePORT site: https://reporter.nih.gov/search/kLDROKswLEKLHUQDAltx2w/project-details/10286334  <br/>
+DROC request: #95 <br/>
 
 ### Study Overview
 Ulcerative colitis (UC) is a chronic intestinal disorder, a type of inﬂammatory bowel disease (IBD). UC causes abdominal pain, diarrhea, bleeding and weight loss. Each year there are about 38,000 new UC cases with about 25-30% being children. UC is often more severe in children than adults. There is no standard regimen for managing all people with UC. Treatment of UC includes 5-aminosalicylic acid (5-ASA), corticosteroids, immunomodulators, biologics and surgery to remove the colon (colectomy). Ideally a personalized medicine approach should be taken to tailor therapy to the individual patient based on their disease severity and predicted response. However, there is currently a lack of guidance to clinicians as to which children are going to do well with these medications and who needs more medication exposure or surgery. To address this important issue, a clinical trial of standardized medical therapy was launched enrolling 428 children newly diagnosed with UC at 29 pediatric medical centers in North America (Predicting Response to Standardized Pediatric Colitis Therapy: The [PROTECT](https://pubmed.ncbi.nlm.nih.gov/28939374/) Study). The PROTECT study collected clinical, genetic, environment and immune factors along with biospecimens including blood, stool, and colonic tissue. It was anticipated that a combination of clinical, genetic, and immunologic tests performed at diagnosis can construct a valuable predictive model for personalized medicine which can be implemented to improve clinical outcomes such as early and late remission on 5-ASA only without the concurrent use of steroid medications. Along this line, state-of-art machine learning algorithms can ultimately utilize the [PROTECT](https://pubmed.ncbi.nlm.nih.gov/28939374/) study data and more accurately predict clinical outcomes. The ability to develop accurate predictive models using basic clinical, endoscopic, histologic, and laboratory data would be extremely helpful to clinicians, as well as to patients/families in helping them better understand the decision making process. 
