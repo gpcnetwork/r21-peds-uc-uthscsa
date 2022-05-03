@@ -12,7 +12,6 @@ Ulcerative colitis (UC) is a chronic intestinal disorder, a type of inﬂammator
 
 To validate model generalizability, PI proposed to use GPC EHR data as external validation dataset. However, there exists apparent data gaps between the prospectively collected PROTECT data and retrospectively collected GPC EHR data, while GPC EHR data is more reflective of common data elements 
 
-
 ### GPC Site Scope of Work
 Participating sites from the Greater Plains Collaborative (GPC) will be performing the following: 
 
@@ -20,6 +19,18 @@ Participating sites from the Greater Plains Collaborative (GPC) will be performi
 2.	Since this study will only use de-identified data, PI and Co-I sites are expected to request Non-Human-Subject (NHS) determination from local IRB which should be submitted along with GPC DROC request. 
 
 The study cohort will be identified by International Classification of Disease (ICD) codes for a pediatric population with Ulcerative Colitis at the participating sites from 2010-2019, and we will also collect multiple clinical variables from all de-identified CDM tables for analysis. 
+
+### Cohort Selection
+#### Inclusion criteria
+Any patients with at least 1 of the following ICD codes:
+-	ICD9: 556.XX, which includes all the sub-codes 556
+-	ICD10: K51.XX, which includes all the sub-codes of K51
+-	age at first one of the above diagnoses is below 18 years old
+
+#### Exclusion criteria
+Existence of any of the following diagnoses: 
+-	ICD9: Any 556.2 or 556.4
+-   ICD10: Any of K51.2 or K51.4
 
 ### Non-Human-Subject Determination
 Only De-identified Ruffed GROUSE data from approval sites will be accessed for the study, which determined by PI and Co-I as Non-HUman-Subject research: 
@@ -29,13 +40,10 @@ Only De-identified Ruffed GROUSE data from approval sites will be accessed for t
 Based on DROC#95 responses, the following GPC sites agreed to participate in the study: 
 | GPC site | Cohort Size |
 | -------- | ----------- |
-
-
-### Cohort Selection
-#### Inclusion criteria
-Any one with at least one diagnosis 
-
-#### Exclusion criteria
+| MU | 155 |
+| MCW | 49 |
+| ALLINA | 49 |
+| UU | 26 |
 
 #### Endpoint assertainment: 
 Covariates pre-selection: 
