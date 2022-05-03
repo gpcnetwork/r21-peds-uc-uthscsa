@@ -34,8 +34,8 @@ Existence of any of the following diagnoses:
 
 ### Non-Human-Subject Determination
 Only De-identified Ruffed GROUSE data from approval sites will be accessed for the study, which determined by PI and Co-I as Non-HUman-Subject research: 
-- [IRB NHS determination - UTHSCSA - PI site](doc/IRB UTHSCSA NHS apporval)
-- [IRB NHS determination - MU - Co-I site](doc/IRB MU NHS apporval.pdf) 
+- [IRB NHS determination - UTHSCSA - PI site](doc/IRB_UTHSCSA_NHS_apporval.pdf)
+- [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_apporval.pdf) 
 
 Based on DROC#95 responses, the following GPC sites agreed to participate in the study: 
 | GPC site | Cohort Size |
