@@ -38,12 +38,22 @@ Only De-identified Ruffed GROUSE data from approval sites will be accessed for t
 - [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_apporval.pdf) 
 
 Based on DROC#95 responses, the following GPC sites agreed to participate in the study: 
-| GPC site | Cohort Size |
-| -------- | ----------- |
-| MU | 155 |
-| MCW | 49 |
-| ALLINA | 49 |
-| UU | 26 |
+| Index | GPC site | Cohort Size |
+| --- | -------- | ----------- |
+| 1 | MU | 155 |
+| 2 | MCW | 49 |
+| 3 | ALLINA | 49 |
+| 4 | UU | 26 |
+| 5 | UTHOUSTON | | 
+| 6 | MCRI | |
+| 7 | IHC | |
+| 8 | UNMC | |
+| 9 | KUMC | | 
+| 10 | WASHU | |
+| 11 | UTHSCSA | |
+| 12 | UIOWA | |
+| 13 | UTSW | |
+  
 
 #### Endpoint assertainment: 
 Covariates pre-selection: 
