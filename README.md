@@ -40,20 +40,17 @@ Only De-identified Ruffed GROUSE data from approval sites will be accessed for t
 Based on DROC#95 responses, the following GPC sites agreed to participate in the study: 
 | Index | GPC site | Cohort Size |
 | --- | -------- | ----------- |
-| 1 | MU | 155 |
-| 2 | MCW | 49 |
-| 3 | ALLINA | 49 |
-| 4 | UU | 26 |
-| 5 | UTHOUSTON | | 
-| 6 | MCRI | |
-| 7 | IHC | |
-| 8 | UNMC | |
-| 9 | KUMC | | 
-| 10 | WASHU | |
-| 11 | UTHSCSA | |
-| 12 | UIOWA | |
-| 13 | UTSW | |
-  
+| 1 | IHC | 729 |
+| 2 | WASHU | 666 |
+| 3 | UTSW | 301 |
+| 4 | MU | 157 | 
+| 5 | UTH | 141 |
+| 6 | KUMC | 92 |
+| 7 | MCRI | 92 |
+| 8 | ALLINA | 49 | 
+| 9 | MCW | 49 |
+| 10 | UTHSCSA | 20 |
+| Total | GPC | 2,296 |  
 
 #### Endpoint assertainment: 
 Covariates pre-selection: 
