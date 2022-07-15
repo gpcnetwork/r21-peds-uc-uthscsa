@@ -37,7 +37,7 @@ Only De-identified Ruffed GROUSE data from approval sites will be accessed for t
 - [IRB NHS determination - UTHSCSA - PI site](doc/IRB_UTHSCSA_NHS_apporval.pdf)
 - [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_apporval.pdf) 
 
-Based on DROC#95 responses, the following GPC sites agreed to participate in the study: 
+Based on DROC#95 responses, the following GPC sites agreed to participate in the study, with eligible cohort size ranked as below:  
 | Index | GPC site | Cohort Size |
 | --- | -------- | ----------- |
 | 1 | IHC | 729 |
