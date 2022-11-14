@@ -1,3 +1,10 @@
+/*
+# Copyright (c) 2021-2025 University of Missouri                   
+# Author: Xing Song, xsm7f@umsystem.edu                            
+# File: table1.sql
+# Description: collect denominator table
+*/
+
 create or replace table consort_diagram (
     CRITERION varchar(20) NOT NULL,
     PAT_CNT integer,
@@ -31,7 +38,7 @@ $$
 var i;
 for(i=0; i<SITES.length; i++){
     var site = SITES[i].toString();
-    var site_cdm = (site === 'MU') ? 'PCORNET_CDM.CDM_2022_APRIL' : 'PCORNET_CDM_' + site;
+    var site_cdm = 'PCORNET_CDM_' + site;
     
     // initial inclusion
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_incld AS
@@ -40,8 +47,8 @@ for(i=0; i<SITES.length; i++){
                                CASE WHEN b.race IN ('05') THEN 'white' WHEN b.race IN ('03') THEN 'black' ELSE 'ot' END AS race, 
                                CASE WHEN b.hispanic = 'Y' THEN 'hispanic' WHEN b.hispanic = 'N' THEN 'non-hispanic' ELSE 'ot' END AS hispanic, 
                                '`+ site +`' AS site
-                        FROM `+ site_cdm +`.DIAGNOSIS a
-                        JOIN `+ site_cdm +`.DEMOGRAPHIC b
+                        FROM `+ site_cdm +`.DEID_DIAGNOSIS a
+                        JOIN `+ site_cdm +`.DEID_DEMOGRAPHIC b
                         ON a.patid = b.patid
                         WHERE a.dx LIKE '556%' OR a.dx LIKE 'K51%' AND
                               a.dx_date >= b.birth_date
@@ -58,7 +65,7 @@ for(i=0; i<SITES.length; i++){
     
     // exclusion 
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_excld AS
-                         SELECT distinct patid FROM `+ site_cdm +`.DIAGNOSIS 
+                         SELECT distinct patid FROM `+ site_cdm +`.DEID_DIAGNOSIS 
                          WHERE dx LIKE '556.2%' OR dx LIKE '556.4%' OR dx LIKE 'K51.2%' OR dx LIKE 'K51.4%';`
                         
     var consort_par = `INSERT INTO CONSORT_DIAGRAM
@@ -95,5 +102,15 @@ for(i=0; i<SITES.length; i++){
 $$
 ;
 
-call get_table1(array_construct('MU','MCW','ALLINA','UU'));
-
+call get_table1(array_construct(
+     'ALLINA'
+    ,'IHC'
+    ,'MCRI'
+    ,'MCW'
+    ,'KUMC'
+    ,'MU'
+    ,'UTHSCSA'
+    ,'UTSW'
+    ,'UTHOUSTON'
+    ,'WASHU'
+));
