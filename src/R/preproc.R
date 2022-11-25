@@ -19,7 +19,7 @@ bmi<-readRDS("./data/peds_uc_cov_bmi.rds") %>%
   group_by(PATID,SITE,VITAL_TYPE) %>%
   arrange(abs(DAYS_SINCE_INDEX)) %>% slice(1:1) %>%
   ungroup %>%
-  filter(DAYS_SINCE_INDEX<=30) %>%
+  # filter(DAYS_SINCE_INDEX<=30) %>%
   select(-VITAL_UNIT,-MEASURE_DATE,-DAYS_SINCE_INDEX) %>%
   spread(VITAL_TYPE,VITAL_VAL) %>%
   filter(!is.na(HT)&!is.na(WT)) %>%
@@ -46,6 +46,17 @@ lab<-readRDS("./data/peds_uc_cov_lab.rds") %>%
   spread(LAB_NAME, RESULT_NUM)
 
 
+# baseline diagnosis
+dx<-readRDS("./data/peds_uc_cov_dx.rds") %>%
+  filter(DAYS_SINCE_INDEX <= 0) %>%
+  group_by(PATID, SITE, DX_GRP) %>%
+  arrange(desc(DAYS_SINCE_INDEX)) %>%
+  slice(1:1) %>% ungroup %>%
+  select(PATID, SITE, DX_GRP) %>%
+  mutate(ind = 1) %>%
+  spread(DX_GRP,ind)
+
+
 # endpoints
 endpt<-readRDS("./data/peds_uc_endpt.rds") %>%
   filter(ENDPT_DAYS_SINCE_INDEX >=0) %>%
@@ -54,16 +65,22 @@ endpt<-readRDS("./data/peds_uc_endpt.rds") %>%
   spread(ENDPT,ENDPT_DAYS_SINCE_INDEX) %>%
   filter(!is.na(censor))
 
+
 # combine
 aset<-readRDS("./data/peds_uc_tbl1.rds") %>%
   left_join(endpt,by=c("PATID","SITE")) %>%
   mutate(status1=as.numeric(!is.na(colectomy)),time1=coalesce(colectomy,censor),
          status2=as.numeric(!is.na(corticosteroids)),time2=coalesce(corticosteroids,censor),
          status3=as.numeric(!is.na(immunomodulator)),time3=coalesce(immunomodulator,censor),
-         status4=as.numeric(!is.na(mesalazine)),time4=coalesce(mesalazine,censor)) %>% 
+         status4=as.numeric(!is.na(mesalazine)),time4=coalesce(mesalazine,censor),
+         status5=as.numeric(!is.na(biologics)),time4=coalesce(biologics,censor)) %>% 
   left_join(bmi,by=c("PATID","SITE")) %>%
   left_join(enc,by=c("PATID","SITE")) %>%
   left_join(lab,by=c("PATID","SITE")) %>%
-  replace_na(list(IP_IND = 0))
+  left_join(dx,by=c("PATID","SITE")) %>%
+  replace_na(list(IP_IND = 0,
+                  abdominal_pain = 0,
+                  diarrhea = 0,
+                  rectal_bleeding = 0))
 
-saveRDS(cov,file="./data/peds_uc_aset.rds")
+saveRDS(aset,file="./data/peds_uc_aset.rds")

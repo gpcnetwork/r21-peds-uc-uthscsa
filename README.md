@@ -23,21 +23,21 @@ The study cohort will be identified by International Classification of Disease (
 ### Cohort Selection
 #### Inclusion criteria
 Any patients with at least 1 of the following ICD codes:
--	ICD9: 556.XX, which includes all the sub-codes 556
--	ICD10: K51.XX, which includes all the sub-codes of K51
--	age at first one of the above diagnoses is below 18 years old
+-	ICD9: 556.XX (ulcerative enterocolitis), which includes all the sub-codes 556
+-	ICD10: K51.XX (ulcerative colitis), which includes all the sub-codes of K51
+-	age at first one of the above diagnoses is below (<) 18 years old
 
 #### Exclusion criteria
 Existence of any of the following diagnoses: 
--	ICD9: Any 556.2 or 556.4
--   ICD10: Any of K51.2 or K51.4
+-	ICD9: Any 556.2X (ulcerative chronic proctitis) or 556.4X (pseudopolyposis of colon)
+-   ICD10: Any of K51.2X (ulcerative chronic proctitis) or K51.4X (inflammatory polyps of colon)
 
 ### Non-Human-Subject Determination
-Only De-identified Ruffed GROUSE data from approval sites will be accessed for the study, which determined by PI and Co-I as Non-HUman-Subject research: 
+Only De-identified GROUSE data from approval sites will be accessed by the approved study team member. This study has been determined by both leading and coordinating sites as Non-HUman-Subject research: 
 - [IRB NHS determination - UTHSCSA - PI site](doc/IRB_UTHSCSA_NHS_apporval.pdf)
 - [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_apporval.pdf) 
 
-Based on DROC#95 responses, the following GPC sites agreed to participate in the study, with eligible cohort size ranked as below:  
+Based on DROC#95 responses, the following 10 GPC sites have agreed to participate in the study, with eligible cohort size ranked as below:  
 | Index | GPC site | Cohort Size |
 | --- | -------- | ----------- |
 | 1 | IHC | 729 |
@@ -52,7 +52,7 @@ Based on DROC#95 responses, the following GPC sites agreed to participate in the
 | 10 | UTHSCSA | 20 |
 | Total | GPC | 2,296 |  
 
-#### Endpoint assertainment: 
+### Endpoint assertainment: 
 Covariates pre-selection: 
 
 

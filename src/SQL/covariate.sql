@@ -42,7 +42,14 @@ create or replace table PED_UC_COV_LAB (
     RESULT_DAYS_SINCE_INDEX integer
 );
 
-
+create or replace table PED_UC_COV_DX (
+    PATID varchar(50) NOT NULL,
+    SITE varchar(10) NOT NULL,
+    DX_GRP varchar(30),
+    DX varchar(10),
+    DX_DATE date,
+    DAYS_SINCE_INDEX integer
+);
 
 create or replace procedure get_covariates(SITES array)
 returns variant
@@ -105,24 +112,47 @@ for(i=0; i<SITES.length; i++){
     var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});
     sqlstmt_run.execute();
     
-    // covariates - encounter
-    var sqlstmt_par = `INSERT INTO PED_UC_COV_ENC
-                       SELECT a.patid,
+    // covariates - diagnosis
+    var sqlstmt_par = `INSERT INTO PED_UC_COV_DX
+                       SELECT distinct
+                              a.patid,
                               '`+ site +`',
-                              b.enc_type,
-                              b.admit_date,
-                              b.discharge_date,
-                              datediff(day,a.index_date::date,b.admit_date::date),
-                              datediff(day,b.admit_date::date,b.discharge_date::date)
+                              'abdominal_pain',
+                              b.DX,
+                              NVL(b.dx_date::date,b.admit_date::date),
+                              datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_encounter b ON a.patid = b.patid 
-                       WHERE b.enc_type in ('IP','EI') AND a.site = '`+ site +`'
+                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       WHERE (b.DX like '789%' OR b.DX like 'R10%') AND a.site = '`+ site +`' 
+                       UNION
+                       SELECT distinct
+                              a.patid,
+                              '`+ site +`',
+                              'diarrhea',
+                              b.DX,
+                              NVL(b.dx_date::date,b.admit_date::date),
+                              datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
+                       FROM ped_uc_table1 a
+                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       WHERE (b.DX like '787.91%' OR b.DX like 'R19.7%') AND a.site = '`+ site +`'
+                       UNION
+                       SELECT distinct
+                              a.patid,
+                              '`+ site +`',
+                              'rectal_bleeding',
+                              b.DX,
+                              NVL(b.dx_date::date,b.admit_date::date),
+                              datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
+                       FROM ped_uc_table1 a
+                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       WHERE (b.DX like '569.3%' OR b.DX like '578.1%' OR b.DX like '578.9%' OR b.DX like '569.12%' OR
+                              b.DX like 'K62.5%') AND a.site = '`+ site +`'
                        ;`
     
     var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});
     sqlstmt_run.execute();
     
-    // covariates - encounter
+    // covariates - labs
     var sqlstmt_par = `INSERT INTO PED_UC_COV_LAB
                        SELECT a.patid,
                               '`+ site +`',
@@ -146,9 +176,26 @@ for(i=0; i<SITES.length; i++){
     var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});
     sqlstmt_run.execute();   
     
+    // covariates - encounter
+    var sqlstmt_par = `INSERT INTO PED_UC_COV_ENC
+                       SELECT a.patid,
+                              '`+ site +`',
+                              b.enc_type,
+                              b.admit_date,
+                              b.discharge_date,
+                              datediff(day,a.index_date::date,b.admit_date::date),
+                              datediff(day,b.admit_date::date,b.discharge_date::date)
+                       FROM ped_uc_table1 a
+                       JOIN `+ site_cdm +`.deid_encounter b ON a.patid = b.patid 
+                       WHERE b.enc_type in ('IP','EI') AND a.site = '`+ site +`'
+                       ;`
+    
+    var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});
+    sqlstmt_run.execute();
 }
 $$
 ;
+
 
 call get_covariates(array_construct(
      'ALLINA'

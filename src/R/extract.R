@@ -23,6 +23,7 @@ sf_conn <- DBI::dbConnect(drv = odbc::odbc(),
                           uid = Sys.getenv("SNOWFLAKE_USER"),
                           pwd = Sys.getenv("SNOWFLAKE_PWD"))
 
+
 # collect table1 (demographic)
 ## 39 individuals have multiple birth dates
 dat<-tbl(sf_conn,in_schema("PEDS_UC","PED_UC_TABLE1")) %>% collect() %>%
@@ -42,6 +43,10 @@ saveRDS(dat,file="./data/peds_uc_cov_enc.rds")
 
 dat<-tbl(sf_conn,in_schema("PEDS_UC","PED_UC_COV_LAB")) %>% collect()
 saveRDS(dat,file="./data/peds_uc_cov_lab.rds")
+
+dat<-tbl(sf_conn,in_schema("PEDS_UC","PED_UC_COV_DX")) %>% collect()
+saveRDS(dat,file="./data/peds_uc_cov_dx.rds")
+
 
 
 # disconnect
