@@ -192,6 +192,7 @@ for(i=0; i<SITES.length; i++){
     
     var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});
     sqlstmt_run.execute();
+    
 }
 $$
 ;

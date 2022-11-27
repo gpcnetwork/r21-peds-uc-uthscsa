@@ -1,0 +1,233 @@
+---
+title: "outcome analysis"
+author: "Xing Song"
+date: '2022-11-26'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+rm(list=ls())
+knitr::opts_chunk$set(echo = FALSE,
+                      message = FALSE,
+                      warning = FALSE,
+                      fig.height=6)
+pacman::p_load(tidyverse,
+               magrittr,
+               broom,
+               survival,
+               survminer,
+               kableExtra,
+               devtools,
+               cmprsk,
+               ggridges,
+               Matrix,
+               glmnet,
+               scales,
+               islasso,
+               caret,
+               pROC,
+               mice,
+               riskRegression,
+               SurvMetrics
+               )
+source_url("https://raw.githubusercontent.com/sxinger/utils/master/analysis_util.R")
+```
+
+## Cohort Overview
+
+**Inclusion criteria**
+Any patients with at least 1 of the following ICD codes:
+-	ICD9: 556.XX, which includes all the sub-codes 556
+-	ICD10: K51.XX, which includes all the sub-codes of K51
+-	age at first one of the above diagnoses is below 18 years old
+
+**Exclusion criteria**
+Existence of any of the following diagnoses: 
+-	ICD9: Any 556.2X or 556.4X
+- ICD10: Any of K51.2X or K51.4X
+
+
+```{r}
+aset<-readRDS("C:/repo/R21_PEDS_UC/data/peds_uc_aset.rds") %>%
+  filter(INDEX_YEAR >= 2010 & INDEX_YEAR <= 2020) %>%
+  filter(AGE_AT_INDEX <= 17 & AGE_AT_INDEX>=4) %>%
+  mutate(AGE_AT_INDEX_12Y = as.numeric(AGE_AT_INDEX>=12))
+```
+
+
+```{r}
+var_lst<-c("AGE_AT_INDEX","AGE_AT_INDEX_12Y","SEX","RACE","HISPANIC","IP_IND",
+           "HT_Z","WT_Z","BMI_Z","BMI_ind",
+           "hemoglobin","hemoglobin_ind",
+           "platelet_count","platelet_count_ind",
+           "leukocyte","leukocyte_ind",
+           "ESR","ESR_ind",
+           "CRP","CRP_ind",
+           "albumin","albumin_ind",
+           "25_OH_VD","25_OH_VD_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+var_fac<-c("AGE_AT_INDEX_12Y","SEX","RACE","HISPANIC","IP_IND","BMI_ind",
+           "hemoglobin_ind","platelet_count_ind","leukocyte_ind","ESR_ind",
+           "CRP_ind","albumin_ind","25_OH_VD_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+
+```
+
+
+```{r}
+case_ctrl<-univar_analysis_mixed(df=aset,
+                                 id_col = "PATID",
+                                 var_lst = var_lst,
+                                 facvar_lst = var_fac,
+                                 pretty=T)
+case_ctrl
+```
+
+```{r}
+case_ctrl<-univar_analysis_mixed(df=aset,
+                                 id_col = "PATID",
+                                 grp = aset$status1,
+                                 var_lst = var_lst,
+                                 facvar_lst = var_fac,
+                                 pretty=T)
+case_ctrl
+```
+
+
+```{r}
+var_lst<-c("AGE_AT_INDEX","SEX","RACE","HISPANIC","IP_IND",
+           "HT_Z","WT_Z","BMI_Z","BMI_ind",
+           "hemoglobin","hemoglobin_ind",
+           "platelet_count","platelet_count_ind",
+           "leukocyte","leukocyte_ind",
+           "ESR","ESR_ind",
+           "CRP","CRP_ind",
+           "albumin","albumin_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+var_fac<-c("SEX","RACE","HISPANIC","IP_IND","BMI_ind",
+           "hemoglobin_ind","platelet_count_ind","leukocyte_ind","ESR_ind",
+           "CRP_ind","albumin_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+           
+```
+
+
+```{r}
+aset<-aset %>% 
+  filter(!is.na(trt1)) %>%
+  select(c(var_lst,"PATID","status1","time1"))
+  
+init<-mice(aset, maxit=0) 
+meth<-init$method
+predM<-init$predictorMatrix
+
+predM[,c("PATID","status1","time1")]=0
+meth[c("HT_Z","WT_Z","BMI_Z","hemoglobin","platelet_count","leukocyte","ESR","CRP","albumin")]="lasso.norm"
+
+set.seed(6)
+aset_imputed<-mice(aset, method=meth, predictorMatrix=predM, m=5)
+aset_imputed<-complete(aset_imputed)
+
+case_ctrl<-univar_analysis_mixed(df=aset_imputed,
+                                 id_col = "PATID",
+                                 grp = aset_imputed$status1,
+                                 var_lst = var_lst,
+                                 facvar_lst = var_fac,
+                                 pretty=T)
+case_ctrl
+```
+
+```{r}
+var_sel<-c("RACE","HISPANIC","IP_IND","HT_Z","WT_Z","BMI_Z",
+           "platelet_count_ind","leukocyte_ind","rectal_bleeding")
+```
+
+
+```{r}
+fit_lr<-glm(as.formula(paste0("status1 ~",paste(var_lst,collapse = "+"))),data=aset_imputed,family="binomial")
+fit_lr_summ<-summary(fit_lr)
+coef_df<-data.frame(fit_lr_summ$coefficients) %>%
+  mutate(OR=round(exp(Estimate),3),
+         pval=round(`Pr...z..`,4))
+coef_df
+```
+
+```{r}
+fit_lr_roc<-pROC::roc(fit_lr$y,fit_lr$fitted.values)
+pROC::ggroc(list(Model=fit_lr_roc))+
+  geom_abline(intercept=1,linetype=2)+
+  labs(subtitle = paste0("AUC:",paste0(round(pROC::ci.auc(fit_lr_roc),4),collapse = ",")))
+```
+
+
+```{r}
+
+fit_surv<-survfit(Surv(time1,status1)~1,data=aset_imputed)
+fit_cox<-coxph(as.formula(paste0("Surv(time1,status1) ~",paste(var_sel,collapse = "+"))),data=aset_imputed,x=TRUE)
+summary(fit_cox)
+```
+
+
+```{r}
+pred_mat<-pec::predictSurvProb(fit_cox,aset_imputed,fit_surv$time)
+
+```
+
+
+
+```{r}
+var_lst<-c("AGE_AT_INDEX","SEX","RACE","HISPANIC","IP_IND",
+           "HT_Z","WT_Z","BMI_Z","BMI_ind",
+           "hemoglobin","hemoglobin_ind",
+           "platelet_count","platelet_count_ind",
+           "leukocyte","leukocyte_ind",
+           "ESR","ESR_ind",
+           "CRP","CRP_ind",
+           "albumin","albumin_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+var_fac<-c("SEX","RACE","HISPANIC","IP_IND","BMI_ind",
+           "hemoglobin_ind","platelet_count_ind","leukocyte_ind","ESR_ind",
+           "CRP_ind","albumin_ind",
+           "abdominal_pain","diarrhea","rectal_bleeding"
+           )
+aset2<-aset %>% filter(trt1=="standard")
+case_ctrl<-univar_analysis_mixed(df=aset2,
+                                 id_col = "PATID",
+                                 grp = aset2$status6,
+                                 var_lst = var_lst,
+                                 facvar_lst = var_fac,
+                                 pretty=T)
+
+case_ctrl
+```
+
+
+
+```{r}
+aset2<-aset %>% filter(trt1=="standard")
+aset2<-aset2 %>% select(c(var_lst,"PATID","status6","time6"))
+init<-mice(aset2, maxit=0) 
+meth<-init$method
+predM<-init$predictorMatrix
+
+predM[,c("PATID","status6","time6")]=0
+meth[c("HT_Z","WT_Z","BMI_Z","hemoglobin","platelet_count","leukocyte","ESR","CRP","albumin")]="lasso.norm"
+
+set.seed(5)
+aset2_imputed<-mice(aset2, method=meth, predictorMatrix=predM, m=5)
+aset2_imputed<-complete(aset2_imputed)
+
+
+case_ctrl<-univar_analysis_mixed(df=aset2_imputed,
+                                 id_col = "PATID",
+                                 grp = aset2_imputed$status6,
+                                 var_lst = var_lst,
+                                 facvar_lst = var_fac,
+                                 pretty=T)
+case_ctrl
+```

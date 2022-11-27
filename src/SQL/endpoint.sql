@@ -164,7 +164,7 @@ call get_endpoints(array_construct(
     ,'UTHOUSTON'
     ,'WASHU'));
 
--- select * from PED_UC_ENDPT;
+select * from PED_UC_ENDPT;
 
 -- quick stats pretty printout
 with site_N as (
@@ -192,8 +192,8 @@ select * from (
     from PED_UC_ENDPT ep cross join all_N n group by ep.ENDPT, n.N
 ) pivot (
     max(summ_val) for site in ( 
-        -- 'ALLINA'
-         'IHC'
+         'ALLINA'
+        ,'IHC'
         ,'MCRI'
         ,'MCW'
         ,'KUMC'
@@ -204,6 +204,6 @@ select * from (
         ,'WASHU'
         ,'ALL'
     ))
-    AS p(SUMM_VAR,/*SITE1,*/SITE2,SITE3,SITE4,SITE5,SITE6,SITE7,SITE8,SITE9,SITE10,"ALL")
+    AS p(SUMM_VAR,SITE1,SITE2,SITE3,SITE4,SITE5,SITE6,SITE7,SITE8,SITE9,SITE10,"ALL")
 order by summ_var
 ;

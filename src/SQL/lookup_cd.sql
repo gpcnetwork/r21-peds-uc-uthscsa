@@ -155,6 +155,21 @@ on rxn.RXCUI = rxmap.RXCUI and
    rxmap.ATN = 'NDC'and rxmap.SAB = 'RXNORM' -- normalized 11-digit NDC codes
 ;
 
+select * from ontology.rxnorm.rxnsat;
+
+select therapy,count(distinct GN) med_cnt 
+from ConceptSet_TRT_Med_RXCUI
+group by therapy;
+
+select therapy, count(distinct ndc) ndc_cnt
+from ConceptSet_TRT_Med_NDC
+group by therapy;
+
+select * from ConceptSet_TRT_Med_RXCUI;
+select * from ConceptSet_TRT_Med_NDC
+where therapy = 'mesalazine';
+
+
 /****************************************************
 Covariate labs
 *****************************************************/
@@ -173,7 +188,7 @@ from ONTOLOGY.LOINC.LOINC_V2_17
 where lower(long_common_name) like '%hemoglobin%'
 union
 select distinct
-       'platelet count' as lab_name,
+       'platelet_count' as lab_name,
        loinc_num,
        component,
        long_common_name,
@@ -251,7 +266,7 @@ from ONTOLOGY.LOINC.LOINC_V2_17
 where  lower(long_common_name) like '%c%reactive%protein%'
 union
 select distinct
-       '25-OH-VD' as lab_name,
+       '25_OH_VD' as lab_name,
        loinc_num,
        component,
        long_common_name,
@@ -262,4 +277,69 @@ select distinct
        status
 from ONTOLOGY.LOINC.LOINC_V2_17
 where lower(long_common_name) like '%25%hydroxyvitamin%d3%'
-;       
+union
+select distinct
+       'neutrophil' as lab_name,
+       loinc_num,
+       component,
+       long_common_name,
+       time_aspct,
+       system,
+       scale_typ,
+       class,
+       status
+from ONTOLOGY.LOINC.LOINC_V2_17
+where lower(long_common_name) like '%neutrophil%'
+union
+select distinct
+       'monocyte' as lab_name,
+       loinc_num,
+       component,
+       long_common_name,
+       time_aspct,
+       system,
+       scale_typ,
+       class,
+       status
+from ONTOLOGY.LOINC.LOINC_V2_17
+where lower(long_common_name) like '%monocyte%'
+union
+select distinct
+       'lymphocyte' as lab_name,
+       loinc_num,
+       component,
+       long_common_name,
+       time_aspct,
+       system,
+       scale_typ,
+       class,
+       status
+from ONTOLOGY.LOINC.LOINC_V2_17
+where lower(long_common_name) like '%lymphocyte%'
+union
+select distinct
+       'basophil' as lab_name,
+       loinc_num,
+       component,
+       long_common_name,
+       time_aspct,
+       system,
+       scale_typ,
+       class,
+       status
+from ONTOLOGY.LOINC.LOINC_V2_17
+where lower(long_common_name) like '%basophil%'
+union
+select distinct
+       'eosinophil' as lab_name,
+       loinc_num,
+       component,
+       long_common_name,
+       time_aspct,
+       system,
+       scale_typ,
+       class,
+       status
+from ONTOLOGY.LOINC.LOINC_V2_17
+where lower(long_common_name) like '%eosinophil%'
+;      

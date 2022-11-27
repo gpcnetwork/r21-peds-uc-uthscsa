@@ -48,6 +48,5 @@ dat<-tbl(sf_conn,in_schema("PEDS_UC","PED_UC_COV_DX")) %>% collect()
 saveRDS(dat,file="./data/peds_uc_cov_dx.rds")
 
 
-
 # disconnect
 DBI::dbDisconnect(sf_conn)

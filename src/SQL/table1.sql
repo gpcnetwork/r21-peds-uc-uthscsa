@@ -16,6 +16,7 @@ create or replace table PED_UC_TABLE1 (
     BIRTH_DATE date NOT NULL,
     INDEX_DATE date NOT NULL,
     AGE_AT_INDEX integer NOT NULL,
+    AGE_AT_INDEX_DAYS integer NOT NULL,
     SEX varchar(3),
     RACE varchar(6),
     HISPANIC varchar(20),
@@ -43,9 +44,10 @@ for(i=0; i<SITES.length; i++){
     // initial inclusion
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_incld AS
                         SELECT a.patid, b.birth_date, MIN(NVL(a.dx_date,a.admit_date)) AS index_date,
-                               datediff(day,b.birth_date,MIN(NVL(a.dx_date,a.admit_date)))/365.25 AS age_at_index, b.sex, 
-                               CASE WHEN b.race IN ('05') THEN 'white' WHEN b.race IN ('03') THEN 'black' ELSE 'ot' END AS race, 
-                               CASE WHEN b.hispanic = 'Y' THEN 'hispanic' WHEN b.hispanic = 'N' THEN 'non-hispanic' ELSE 'ot' END AS hispanic, 
+                               round(datediff(day,b.birth_date,MIN(NVL(a.dx_date,a.admit_date)))/365.25) AS age_at_index, 
+                               datediff(day,b.birth_date,MIN(NVL(a.dx_date,a.admit_date))) AS age_at_index_day, b.sex, 
+                               CASE WHEN b.race IN ('05') THEN 'white' WHEN b.race IN ('03') THEN 'black' WHEN b.race in ('UN','NI') or b.race is NULL THEN 'unk' ELSE 'ot' END AS race, 
+                               CASE WHEN b.hispanic = 'Y' THEN 'hispanic' WHEN b.hispanic = 'N' THEN 'non-hispanic' WHEN b.hispanic in ('UN','NI') or b.hispanic is NULL THEN 'unk' ELSE 'ot' END AS hispanic, 
                                '`+ site +`' AS site
                         FROM `+ site_cdm +`.DEID_DIAGNOSIS a
                         JOIN `+ site_cdm +`.DEID_DEMOGRAPHIC b
@@ -81,7 +83,7 @@ for(i=0; i<SITES.length; i++){
     // eligible
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_elig AS
                         SELECT a.* FROM pat_incld a
-                        WHERE a.AGE_AT_INDEX <= 18 AND
+                        WHERE a.AGE_AT_INDEX < 18 AND -- strictly less than 18
                               NOT EXISTS (SELECT 1 from pat_excld WHERE pat_excld.patid = a.patid);`
         
     var consort_par = `INSERT INTO CONSORT_DIAGRAM
@@ -114,3 +116,67 @@ call get_table1(array_construct(
     ,'UTHOUSTON'
     ,'WASHU'
 ));
+
+-- quick stats pretty printout
+with site_N as (
+    select site, count(distinct patid) AS N from PED_UC_TABLE1 group by site
+),  all_N as (
+    select count(distinct patid) AS N from PED_UC_TABLE1
+)
+select * from (
+    select '1_N' summ_var, tbl1.site, count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)' AS summ_val 
+    from PED_UC_TABLE1 tbl1, site_N n where tbl1.site = n.site  group by tbl1.site,n.N
+    union
+    select '1_N' summ_var, 'ALL', count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)' AS summ_val 
+    from PED_UC_TABLE1 tbl1 cross join all_N n group by n.N
+    union
+    select '2_age_at_index', site, round(avg(age_at_index)) || ' (' || round(stddev(age_at_index),1) ||')' 
+    from PED_UC_TABLE1 group by site
+    union
+    select '2_age_at_index', 'ALL', round(avg(age_at_index)) || ' (' || round(stddev(age_at_index),1) ||')' 
+    from PED_UC_TABLE1
+    union
+    select '3_sex:' || tbl1.sex, tbl1.site, count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)' 
+    from PED_UC_TABLE1 tbl1, site_N n where tbl1.site = n.site  group by tbl1.sex,tbl1.site,n.N
+    union
+    select '3_sex:' || tbl1.sex, 'ALL', count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)' 
+    from PED_UC_TABLE1 tbl1 cross join all_N n group by tbl1.sex, n.N
+    union
+    select '4_race:' || tbl1.race, tbl1.site, count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)'  
+    from PED_UC_TABLE1 tbl1, site_N n where tbl1.site = n.site  group by tbl1.race,tbl1.site,n.N
+    union
+    select '4_race:' || tbl1.race, 'ALL', count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)'  
+    from PED_UC_TABLE1 tbl1 cross join all_N n  group by tbl1.race,n.N
+    union
+    select '5_hispanic:' || tbl1.hispanic, tbl1.site, count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)'  
+    from PED_UC_TABLE1 tbl1, site_N n where tbl1.site = n.site group by tbl1.hispanic,tbl1.site,n.N
+    union
+    select '5_hispanic:' || tbl1.hispanic, 'ALL', count(distinct tbl1.patid) || ' (' || round(count(distinct tbl1.patid)/n.N*100) ||'%)'  
+    from PED_UC_TABLE1 tbl1 cross join all_N n group by tbl1.hispanic,n.N
+) pivot (
+    max(summ_val) for site in (
+         'ALLINA'
+        ,'IHC'
+        ,'MCRI'
+        ,'MCW'
+        ,'KUMC'
+        ,'MU'
+        ,'UTHSCSA'
+        ,'UTSW'
+        ,'UTHOUSTON'
+        ,'WASHU'
+        ,'ALL'))
+    AS p( SUMM_VAR
+         ,SITE1
+         ,SITE2
+         ,SITE3
+         ,SITE4
+         ,SITE5
+         ,SITE6
+         ,SITE7
+         ,SITE8
+         ,SITE9
+         ,SITE10
+         ,"ALL")
+order by summ_var
+;
