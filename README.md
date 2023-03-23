@@ -52,7 +52,7 @@ Based on DROC#95 responses, the following 10 GPC sites have agreed to participat
 | 10 | UTHSCSA | 20 |
 | Total | GPC | 2,296 |  
 
-### Endpoint assertainment: 
+### Endpoint assertainment
 Covariates pre-selection: 
 
 ### Analysis I: 
