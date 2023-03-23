@@ -55,6 +55,5 @@ Based on DROC#95 responses, the following 10 GPC sites have agreed to participat
 ### Endpoint assertainment: 
 Covariates pre-selection: 
 
-
-### Reproduction and Dissemination
+### Analysis I: 
 
