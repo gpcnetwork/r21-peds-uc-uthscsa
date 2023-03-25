@@ -34,8 +34,8 @@ Existence of any of the following diagnoses:
 
 ### Non-Human-Subject Determination
 Only De-identified GROUSE data from approval sites will be accessed by the approved study team member. This study has been determined by both leading and coordinating sites as Non-HUman-Subject research: 
-- [IRB NHS determination - UTHSCSA - PI site](doc/IRB_UTHSCSA_NHS_apporval.pdf)
-- [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_apporval.pdf) 
+- [IRB NHS determination - UTHSCSA - PI site](doc/IRB_UTHSCSA_NHS_determination.pdf)
+- [IRB NHS determination - MU - Co-I site](doc/IRB_MU_NHS_determination.pdf) 
 
 Based on DROC#95 responses, the following 10 GPC sites have agreed to participate in the study, with eligible cohort size ranked as below:  
 | Index | GPC site | Cohort Size |
