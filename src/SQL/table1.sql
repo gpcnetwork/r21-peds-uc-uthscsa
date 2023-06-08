@@ -49,8 +49,8 @@ for(i=0; i<SITES.length; i++){
                                CASE WHEN b.race IN ('05') THEN 'white' WHEN b.race IN ('03') THEN 'black' WHEN b.race in ('UN','NI') or b.race is NULL THEN 'unk' ELSE 'ot' END AS race, 
                                CASE WHEN b.hispanic = 'Y' THEN 'hispanic' WHEN b.hispanic = 'N' THEN 'non-hispanic' WHEN b.hispanic in ('UN','NI') or b.hispanic is NULL THEN 'unk' ELSE 'ot' END AS hispanic, 
                                '`+ site +`' AS site
-                        FROM `+ site_cdm +`.DEID_DIAGNOSIS a
-                        JOIN `+ site_cdm +`.DEID_DEMOGRAPHIC b
+                        FROM `+ site_cdm +`.V_DEID_DIAGNOSIS a
+                        JOIN `+ site_cdm +`.V_DEID_DEMOGRAPHIC b
                         ON a.patid = b.patid
                         WHERE a.dx LIKE '556%' OR a.dx LIKE 'K51%' AND
                               a.dx_date >= b.birth_date
@@ -67,7 +67,7 @@ for(i=0; i<SITES.length; i++){
     
     // exclusion 
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_excld AS
-                         SELECT distinct patid FROM `+ site_cdm +`.DEID_DIAGNOSIS 
+                         SELECT distinct patid FROM `+ site_cdm +`.V_DEID_DIAGNOSIS 
                          WHERE dx LIKE '556.2%' OR dx LIKE '556.4%' OR dx LIKE 'K51.2%' OR dx LIKE 'K51.4%';`
                         
     var consort_par = `INSERT INTO CONSORT_DIAGRAM

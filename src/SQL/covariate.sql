@@ -73,39 +73,39 @@ for(i=0; i<SITES.length; i++){
                        SELECT a.patid,'`+ site +`','HT',b.ht,'in',b.measure_date::date,
                               datediff(day,a.index_date,b.measure_date::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_vital b ON a.patid = b.patid
+                       JOIN `+ site_cdm +`.v_deid_vital b ON a.patid = b.patid
                        WHERE b.ht is not null AND a.site = '`+ site +`'
                        UNION
                        select a.PATID,'`+ site +`','HT',oc.OBSCLIN_RESULT_NUM,oc.OBSCLIN_RESULT_UNIT,oc.OBSCLIN_START_DATE::date,
                               datediff(day,a.index_date,oc.OBSCLIN_START_DATE::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_obs_clin oc ON a.patid = oc.patid AND
+                       JOIN `+ site_cdm +`.v_deid_obs_clin oc ON a.patid = oc.patid AND
                             oc.OBSCLIN_TYPE = 'LC' and oc.OBSCLIN_CODE = '8302-2' AND a.site = '`+ site +`'
                        UNION
                        -- weight --
                        SELECT a.patid,'`+ site +`','WT',b.wt,'lb',b.measure_date::date,
                               datediff(day,a.index_date,b.measure_date::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_vital b ON a.patid = b.patid
+                       JOIN `+ site_cdm +`.v_deid_vital b ON a.patid = b.patid
                        WHERE b.wt is not null AND a.site = '`+ site +`'
                        UNION
                        select a.PATID,'`+ site +`','WT',oc.OBSCLIN_RESULT_NUM,oc.OBSCLIN_RESULT_UNIT,oc.OBSCLIN_START_DATE::date,
                               datediff(day,a.index_date,oc.OBSCLIN_START_DATE::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_obs_clin oc ON a.patid = oc.patid AND
+                       JOIN `+ site_cdm +`.v_deid_obs_clin oc ON a.patid = oc.patid AND
                             oc.OBSCLIN_TYPE = 'LC' and oc.OBSCLIN_CODE = '29463-7' AND a.site = '`+ site +`'
                        UNION
                        -- bmi --
                        SELECT a.patid,'`+ site +`','BMI',b.ORIGINAL_BMI,'kg/m2',b.measure_date::date,
                               datediff(day,a.index_date,b.measure_date::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_vital b ON a.patid = b.patid
+                       JOIN `+ site_cdm +`.v_deid_vital b ON a.patid = b.patid
                        WHERE b.ORIGINAL_BMI is not null AND a.site = '`+ site +`'
                        UNION
                        select a.PATID,'`+ site +`','BMI',oc.OBSCLIN_RESULT_NUM,oc.OBSCLIN_RESULT_UNIT,oc.OBSCLIN_START_DATE::date,
                               datediff(day,a.index_date,oc.OBSCLIN_START_DATE::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_obs_clin oc ON a.patid = oc.patid AND
+                       JOIN `+ site_cdm +`.v_deid_obs_clin oc ON a.patid = oc.patid AND
                             oc.OBSCLIN_TYPE = 'LC' and oc.OBSCLIN_CODE = '39156-5' AND a.site = '`+ site +`'
                        ;`
     
@@ -122,7 +122,7 @@ for(i=0; i<SITES.length; i++){
                               NVL(b.dx_date::date,b.admit_date::date),
                               datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       JOIN `+ site_cdm +`.v_deid_diagnosis b ON a.patid = b.patid 
                        WHERE (b.DX like '789%' OR b.DX like 'R10%') AND a.site = '`+ site +`' 
                        UNION
                        SELECT distinct
@@ -133,7 +133,7 @@ for(i=0; i<SITES.length; i++){
                               NVL(b.dx_date::date,b.admit_date::date),
                               datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       JOIN `+ site_cdm +`.v_deid_diagnosis b ON a.patid = b.patid 
                        WHERE (b.DX like '787.91%' OR b.DX like 'R19.7%') AND a.site = '`+ site +`'
                        UNION
                        SELECT distinct
@@ -144,7 +144,7 @@ for(i=0; i<SITES.length; i++){
                               NVL(b.dx_date::date,b.admit_date::date),
                               datediff(day,a.index_date,NVL(b.dx_date::date,b.admit_date::date))
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_diagnosis b ON a.patid = b.patid 
+                       JOIN `+ site_cdm +`.v_deid_diagnosis b ON a.patid = b.patid 
                        WHERE (b.DX like '569.3%' OR b.DX like '578.1%' OR b.DX like '578.9%' OR b.DX like '569.12%' OR
                               b.DX like 'K62.5%') AND a.site = '`+ site +`'
                        ;`
@@ -168,7 +168,7 @@ for(i=0; i<SITES.length; i++){
                               datediff(day,a.index_date,b.specimen_date),
                               datediff(day,a.index_date,b.result_date)                              
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_lab_result_cm b ON a.patid = b.patid
+                       JOIN `+ site_cdm +`.v_deid_lab_result_cm b ON a.patid = b.patid
                        JOIN conceptset_labs_loinc l ON l.loinc_num = b.lab_loinc
                        WHERE a.site = '`+ site +`'
                        ;`
@@ -186,8 +186,8 @@ for(i=0; i<SITES.length; i++){
                               datediff(day,a.index_date::date,b.admit_date::date),
                               datediff(day,b.admit_date::date,b.discharge_date::date)
                        FROM ped_uc_table1 a
-                       JOIN `+ site_cdm +`.deid_encounter b ON a.patid = b.patid 
-                       WHERE b.enc_type in ('IP','EI') AND a.site = '`+ site +`'
+                       JOIN `+ site_cdm +`.v_deid_encounter b ON a.patid = b.patid 
+                       WHERE b.enc_type in ('IP','EI','IS') AND a.site = '`+ site +`'
                        ;`
     
     var sqlstmt_run = snowflake.createStatement({sqlText:sqlstmt_par});

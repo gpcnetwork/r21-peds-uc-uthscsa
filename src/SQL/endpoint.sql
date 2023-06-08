@@ -40,7 +40,7 @@ for(i=0; i<SITES.length; i++){
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_endpt1 AS
                         SELECT a.patid, a.index_date, a.site, min(px.px_date) AS first_colectomy_date
                         FROM PED_UC_TABLE1 a
-                        JOIN `+ site_cdm +`.DEID_PROCEDURES px
+                        JOIN `+ site_cdm +`.V_DEID_PROCEDURES px
                         ON a.patid = px.patid AND a.site = '`+ site +`'
                         WHERE  (px in ('44121','44139','44140','44141','44143','44144','44145','44146','44147',
                                      '44150','44151','44152','44153','44154','44155','44156','44157','44158','44160',
@@ -60,7 +60,7 @@ for(i=0; i<SITES.length; i++){
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_endpt2 AS
                         SELECT a.patid, a.index_date, a.site, cd.therapy, NVL(min(p.rx_start_date),min(p.rx_order_date)) AS first_med_date
                         FROM PED_UC_TABLE1 a
-                        JOIN `+ site_cdm +`.DEID_PRESCRIBING p
+                        JOIN `+ site_cdm +`.V_DEID_PRESCRIBING p
                         ON a.patid = p.patid AND a.site = '`+ site +`'
                         JOIN conceptset_trt_med_rxcui cd
                         ON p.RXNORM_CUI = cd.RXCUI
@@ -69,7 +69,7 @@ for(i=0; i<SITES.length; i++){
                         UNION
                         SELECT a.patid, a.index_date, a.site, cd.therapy, min(d.dispense_date)
                         FROM PED_UC_TABLE1 a
-                        JOIN `+ site_cdm +`.DEID_DISPENSING d
+                        JOIN `+ site_cdm +`.V_DEID_DISPENSING d
                         ON a.patid = d.patid AND a.site = '`+ site +`'
                         JOIN conceptset_trt_med_ndc cd
                         ON d.NDC = cd.NDC
@@ -78,7 +78,7 @@ for(i=0; i<SITES.length; i++){
                         UNION
                         SELECT a.patid, a.index_date, a.site, cd.therapy, min(m.medadmin_start_date)
                         FROM PED_UC_TABLE1 a
-                        JOIN `+ site_cdm +`.DEID_MED_ADMIN m
+                        JOIN `+ site_cdm +`.V_DEID_MED_ADMIN m
                         ON a.patid = m.patid AND a.site = '`+ site +`'
                         JOIN conceptset_trt_med_rxcui cd
                         ON m.medadmin_code = cd.RXCUI AND m.medadmin_type = 'RX'
@@ -87,7 +87,7 @@ for(i=0; i<SITES.length; i++){
                         UNION
                         SELECT a.patid, a.index_date, a.site, cd.therapy, min(m.medadmin_start_date)
                         FROM PED_UC_TABLE1 a
-                        JOIN `+ site_cdm +`.DEID_MED_ADMIN m
+                        JOIN `+ site_cdm +`.V_DEID_MED_ADMIN m
                         ON a.patid = m.patid AND a.site = '`+ site +`'
                         JOIN conceptset_trt_med_ndc cd
                         ON m.medadmin_code = cd.NDC AND m.medadmin_type = 'ND'
@@ -103,21 +103,21 @@ for(i=0; i<SITES.length; i++){
                         WITH censor_stk AS (
                             SELECT a.patid, a.index_date, a.site, NVL(max(e.admit_date), max(e.dx_date)) AS censor_date
                             FROM PED_UC_TABLE1 a
-                            JOIN `+ site_cdm +`.DEID_DIAGNOSIS e
+                            JOIN `+ site_cdm +`.V_DEID_DIAGNOSIS e
                             ON a.patid = e.patid AND a.site = '`+ site +`'
                             WHERE NVL(e.admit_date, e.dx_date) >= a.index_date
                             GROUP BY a.patid, a.index_date, a.site
                             UNION
                             SELECT a.patid, a.index_date, a.site, NVL(max(e.admit_date), max(e.px_date)) AS censor_date
                             FROM PED_UC_TABLE1 a
-                            JOIN `+ site_cdm +`.DEID_PROCEDURES e
+                            JOIN `+ site_cdm +`.V_DEID_PROCEDURES e
                             ON a.patid = e.patid AND a.site = '`+ site +`'
                             WHERE NVL(e.admit_date, e.px_date) >= a.index_date
                             GROUP BY a.patid, a.index_date, a.site
                             UNION
                             SELECT a.patid, a.index_date, a.site, NVL(max(e.rx_start_date), max(e.rx_order_date)) AS censor_date
                             FROM PED_UC_TABLE1 a
-                            JOIN `+ site_cdm +`.DEID_PRESCRIBING e
+                            JOIN `+ site_cdm +`.V_DEID_PRESCRIBING e
                             ON a.patid = e.patid AND a.site = '`+ site +`'
                             WHERE NVL(e.rx_start_date, e.rx_order_date) >= a.index_date
                             GROUP BY a.patid, a.index_date, a.site
