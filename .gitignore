@@ -1,1 +1,9 @@
-*data/*
+# hidden folders or files
+*.*/*
+*.config*
+
+# private or temp folder
+*data/
+*private/
+*archive/
+*tmp_dir/
