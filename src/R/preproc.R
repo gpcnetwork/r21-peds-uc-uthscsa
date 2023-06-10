@@ -1,11 +1,5 @@
-# Copyright (c) 2021-2025 University of Missouri                   
-# Author: Xing Song, xsm7f@umsystem.edu                            
-# File: preproc.R
-# Description: data preprocessing
-# Dependency: extract.R
-
 rm(list=ls()); gc()
-setwd("C:/repo/R21_PEDS_UC")
+setwd("C:/repo/R21_PedsUC")
 
 # install.packages("pacman")
 pacman::p_load(
@@ -107,17 +101,29 @@ bmi_ind<-tbl1 %>% dplyr::select(PATID,SITE) %>%
   replace(is.na(.), 0)
 
 # baseline encounter
-enc<-tbl1 %>% dplyr::select(PATID,SITE) %>%
+enc<-tbl1 %>% dplyr::select(PATID,SITE,ENC_TYPE_AT_INDEX) %>%
+  ## IP_IND1: use the associated enc_type in the original diagnosis table
+  mutate(IP_IND1 = case_when(ENC_TYPE_AT_INDEX %in% c("IP","EI") ~ 1,
+                             TRUE ~ 0)) %>%
+  ## IP_IND2: if the initial UC diagnosis occurred within an IP or EI encounter 
   left_join(readRDS("./data/peds_uc_cov_enc.rds") %>%
-              filter(ADMIT_DAYS_SINCE_INDEX<=0&ADMIT_DAYS_SINCE_INDEX+LOS>=0) %>%
+              filter(ADMIT_DAYS_SINCE_INDEX<=0&ADMIT_DAYS_SINCE_INDEX+LOS>=0&ENC_TYPE %in% c("IP","EI")) %>%
               group_by(PATID,SITE) %>%
               arrange(ADMIT_DAYS_SINCE_INDEX) %>% slice(1:1) %>% ungroup %>%
-              mutate(IP_IND = 1) %>%
-              dplyr::select(PATID, SITE, IP_IND, LOS),
+              mutate(IP_IND2 = 1) %>%
+              dplyr::select(PATID, SITE, IP_IND2),
             by = c("PATID","SITE")) %>%
-  replace_na(list(IP_IND = 0))
-
-
+  replace_na(list(IP_IND2 = 0)) %>%
+  ## IP_IND3: if the initial US diagnosis occurred exactly on the first day of IP or EI
+  left_join(readRDS("./data/peds_uc_cov_enc.rds") %>%
+              filter(ADMIT_DAYS_SINCE_INDEX==0&ENC_TYPE %in% c("IP","EI")) %>%
+              group_by(PATID,SITE) %>%
+              arrange(ADMIT_DAYS_SINCE_INDEX) %>% slice(1:1) %>% ungroup %>%
+              mutate(IP_IND3 = 1) %>%
+              dplyr::select(PATID, SITE, IP_IND3),
+            by = c("PATID","SITE")) %>%
+  replace_na(list(IP_IND3 = 0))
+  
 # baseline labs
 lab<-readRDS("./data/peds_uc_cov_lab.rds") %>%
   filter(!is.na(RESULT_NUM)) %>%
@@ -220,12 +226,13 @@ aset %<>%
          time_bio2imm=case_when(trt1=="biologics"&time3*status3 - time5*status5>0 ~ time3*status3 - time5*status5),
          time_bio2col=case_when(trt1=="biologics"&time1*status1 - time5*status5>0 ~ time1*status1 - time5*status5),
          time_imm2bio=case_when(trt1=="immunomodulator"&time5*status5 - time3*status3>0 ~ time5*status5 - time3*status3),
-         time_imm2col=case_when(trt1=="immunomodulator"&time1*status1 - time3*status3>0 ~ time1*status1 - time3*status3)) %>%
+         time_imm2col=case_when(trt1=="immunomodulator"&time1*status1 - time3*status3>0 ~ time1*status1 - time3*status3),
+         time_idx2std=case_when(trt1=="standard" ~ pmin(time2,time4),TRUE ~ -0)) %>%
   mutate(status6=as.numeric(trt1=="standard"&status1+status3+status5>0),
          status6_col = as.numeric(trt1=="standard"&status1>0),
          status_bio_imm = as.numeric(trt1=="standard"&status3+status5>0),
-         time6=case_when(status6==1 ~ pmin(time1,time3,time5) - pmin(time2*status2,time4*status4),
-                         TRUE ~ censor))
+         time6=case_when(status6==1 ~ pmin(time1,time3,time5) - time_idx2std,
+                         TRUE ~ censor - time_idx2std))
 
 saveRDS(aset,file="./data/peds_uc_aset.rds")
 

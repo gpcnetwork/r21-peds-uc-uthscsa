@@ -40,17 +40,17 @@ Only De-identified GROUSE data from approval sites will be accessed by the appro
 Based on DROC#95 responses, the following 10 GPC sites have agreed to participate in the study, with eligible cohort size ranked as below:  
 | Index | GPC site | Cohort Size |
 | --- | -------- | ----------- |
-| 1 | IHC | 729 |
-| 2 | WASHU | 666 |
-| 3 | UTSW | 301 |
-| 4 | MU | 157 | 
-| 5 | UTH | 141 |
-| 6 | KUMC | 92 |
-| 7 | MCRI | 92 |
-| 8 | ALLINA | 49 | 
-| 9 | MCW | 49 |
-| 10 | UTHSCSA | 20 |
-| Total | GPC | 2,296 |  
+| 1 | IHC | 667 |
+| 2 | WASHU | 615 |
+| 3 | UTSW | 274 |
+| 4 | MU | 149 | 
+| 5 | UTH | 135 |
+| 6 | KUMC | 80 |
+| 7 | MCRI | 83 |
+| 8 | ALLINA | 44 | 
+| 9 | MCW | 37 |
+| 10 | UTHSCSA | 18 |
+| Total | GPC | 2,102 |  
 
 
 

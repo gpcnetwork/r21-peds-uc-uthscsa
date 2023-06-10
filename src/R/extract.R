@@ -1,11 +1,5 @@
-# Copyright (c) 2021-2025 University of Missouri                   
-# Author: Xing Song, xsm7f@umsystem.edu                            
-# File: extract.R
-# Description: data import from database into R
-# Dependency: all SQL scripts and database connection
-
 rm(list=ls()); gc()
-setwd("C:/repo/R21_PEDS_UC")
+setwd("C:/repo/R21_PedsUC")
 
 # install.packages("pacman")
 pacman::p_load(
@@ -50,3 +44,4 @@ saveRDS(dat,file="./data/peds_uc_cov_dx.rds")
 
 # disconnect
 DBI::dbDisconnect(sf_conn)
+

@@ -17,6 +17,7 @@ create or replace table PED_UC_TABLE1 (
     INDEX_DATE date NOT NULL,
     AGE_AT_INDEX integer NOT NULL,
     AGE_AT_INDEX_DAYS integer NOT NULL,
+    ENC_TYPE_AT_INDEX varchar(3),
     SEX varchar(3),
     RACE varchar(6),
     HISPANIC varchar(20),
@@ -43,18 +44,33 @@ for(i=0; i<SITES.length; i++){
     
     // initial inclusion
     var sqlstmt_par = `CREATE OR REPLACE TEMPORARY TABLE pat_incld AS
-                        SELECT a.patid, b.birth_date, MIN(NVL(a.dx_date,a.admit_date)) AS index_date,
-                               round(datediff(day,b.birth_date,MIN(NVL(a.dx_date,a.admit_date)))/365.25) AS age_at_index, 
-                               datediff(day,b.birth_date,MIN(NVL(a.dx_date,a.admit_date))) AS age_at_index_day, b.sex, 
+                        WITH init_dx AS (
+                            SELECT a.patid, b.birth_date, NVL(a.dx_date,a.admit_date) AS index_date, a.enc_type AS enc_type_at_index,
+                               round(datediff(day,b.birth_date,NVL(a.dx_date,a.admit_date))/365.25) AS age_at_index, 
+                               datediff(day,b.birth_date,NVL(a.dx_date,a.admit_date)) AS age_at_index_days, b.sex, 
                                CASE WHEN b.race IN ('05') THEN 'white' WHEN b.race IN ('03') THEN 'black' WHEN b.race in ('UN','NI') or b.race is NULL THEN 'unk' ELSE 'ot' END AS race, 
                                CASE WHEN b.hispanic = 'Y' THEN 'hispanic' WHEN b.hispanic = 'N' THEN 'non-hispanic' WHEN b.hispanic in ('UN','NI') or b.hispanic is NULL THEN 'unk' ELSE 'ot' END AS hispanic, 
-                               '`+ site +`' AS site
+                               '`+ site +`' AS site,
+                               row_number() over (partition by a.patid order by NVL(a.dx_date,a.admit_date)) AS rn
                         FROM `+ site_cdm +`.V_DEID_DIAGNOSIS a
                         JOIN `+ site_cdm +`.V_DEID_DEMOGRAPHIC b
                         ON a.patid = b.patid
                         WHERE a.dx LIKE '556%' OR a.dx LIKE 'K51%' AND
                               a.dx_date >= b.birth_date
-                        GROUP BY a.patid, b.birth_date, b.sex, b.race, b.hispanic;`
+                        )
+                        SELECT patid,
+                               birth_date, 
+                               index_date, 
+                               age_at_index, 
+                               age_at_index_days, 
+                               enc_type_at_index,
+                               sex,
+                               race,
+                               hispanic,
+                               site
+                        FROM init_dx
+                        WHERE rn = 1
+                        ;`
                         
     var consort_par = `INSERT INTO CONSORT_DIAGRAM
                         SELECT 'initial', COUNT(DISTINCT patid), '`+ site +`'

@@ -1,17 +1,12 @@
-# Copyright (c) 2021-2025 University of Missouri                   
-# Author: Xing Song, xsm7f@umsystem.edu                            
-# File: impute.R
-# Description: perform imputation
-# Dependency: preproc.R
-
 rm(list=ls()); gc()
-setwd("C:/repo/R21_PEDS_UC")
+setwd("C:/repo/R21_PedsUC")
 
 # install.packages("pacman")
 pacman::p_load(
    tidyverse
   ,magrittr
   ,mice
+  ,ranger
   # ,ImputeRobust
   # ,gamlss
 )
@@ -21,7 +16,9 @@ var_lst<-c(
   ,"SEX"
   ,"RACE"
   ,"HISPANIC"
-  ,"IP_IND"
+  ,"IP_IND1"
+  ,"IP_IND2"
+  ,"IP_IND3"
   ,"HT_Z"
   ,"WT_Z"
   ,"BMI_Z"
@@ -55,7 +52,7 @@ var_imp<-c(
    ,"basophil"
 )
 
-aset<-readRDS("C:/repo/R21_PEDS_UC/data/peds_uc_aset.rds") %>%
+aset<-readRDS("./data/peds_uc_aset.rds") %>%
   filter(INDEX_YEAR >= 2010 & INDEX_YEAR <= 2020) %>%
   filter(AGE_AT_INDEX <= 17 & AGE_AT_INDEX>=4) %>%
   mutate(AGE_AT_INDEX_12Y = as.numeric(AGE_AT_INDEX>=12)) %>%
@@ -74,7 +71,7 @@ predM[,c("PATID","status6","time6")]=0
 meth[c("HT_Z","WT_Z","BMI_Z","neutrophil","hemoglobin")]="norm.predict"
 meth[c("platelet_count","leukocyte","ESR","CRP","eosinophil","monocyte","lymphocyte")]="rf"
 
-aset_mice_obj<-mice(aset, method=meth, predictorMatrix=predM, m=5)
+aset_mice_obj<-mice(aset, method=meth, predictorMatrix=predM, m=10)
 aset_imputed_long<-complete(aset_mice_obj,"long",include = FALSE)
 
 # sanity check
@@ -85,17 +82,19 @@ ggplot(aset_imputed_long %>% select(all_of(c(var_imp,".imp"))) %>%
   geom_boxplot(aes(fill=as.factor(`.imp`)),alpha=0.3)+
   facet_wrap(~ var,scales="free",ncol=5)
 
-# form imputed dataset
-aset_imputed<-aset_imputed_long %>% 
-  select(all_of(c(var_imp,".imp","PATID"))) %>%
-  gather(var,val,-`.imp`,-PATID) %>%
-  group_by(PATID,var) %>%
-  summarise(val=mean(val),.groups="drop") %>%
-  spread(var,val) %>%
-  left_join(aset %>% 
-              select(all_of(c(var_lst[!var_lst %in% var_imp],"PATID","status6","time6"))),
-            by = "PATID")
+saveRDS(aset_imputed_long,file=paste0("./data/peds_uc_aset",nrow(aset),"_imputed_long.rds"))
 
-saveRDS(aset_imputed,
-        file=paste0("C:/repo/R21_PEDS_UC/data/peds_uc_aset",nrow(aset),"_imputed.rds"))
+# form imputed dataset
+# aset_imputed<-aset_imputed_long %>% 
+#   select(all_of(c(var_imp,".imp","PATID"))) %>%
+#   gather(var,val,-`.imp`,-PATID) %>%
+#   group_by(PATID,var) %>%
+#   summarise(val=mean(val),.groups="drop") %>%
+#   spread(var,val) %>%
+#   left_join(aset %>% 
+#               select(all_of(c(var_lst[!var_lst %in% var_imp],"PATID","status6","time6"))),
+#             by = "PATID")
+
+#saveRDS(aset_imputed,file=paste0("C:/repo/R21_PEDS_UC/data/peds_uc_aset",nrow(aset),"_imputed.rds"))
+
 
