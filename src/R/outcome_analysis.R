@@ -124,6 +124,15 @@ for(var in var_lst){
       logHR_df_obs = (((N-2)+1)/((N-2)+3))*(N-2)*(1-logHR_lambda),
       logHR_df_adj = 1/(1/logHR_df_old+1/logHR_df_obs),
       pval_logHR_wald = 2*pt(abs(logHR_wald),logHR_df_adj,lower.tail=FALSE)
+    ) %>%
+    # add confidence intervals
+    mutate(
+      OR = exp(logOR_wald),
+      OR_ci_lower = exp(logOR_wald - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
+      OR_ci_upper = exp(logOR_wald + qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
+      HR = exp(logHR_wald),
+      HR_ci_lower = exp(logHR_wald - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
+      HR_ci_upper = exp(logHR_wald + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
     )
 
   uni_coef_df %<>% 
@@ -231,7 +240,13 @@ full_lr %<>%
     logOR_df_adj = 1/(1/logOR_df_old+1/logOR_df_obs),
     pval_logOR_wald = 2*pt(abs(logOR_wald),logOR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add pooled CI
+  mutate(
+    OR = exp(logOR_wald),
+    OR_ci_lower = exp(logOR_wald - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
+    OR_ci_upper = exp(logOR_wald + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  )
 
 kable(full_lr,"html") %>%
   kable_styling("striped") %>%
@@ -258,7 +273,13 @@ sel_lr %<>%
     logOR_df_adj = 1/(1/logOR_df_old+1/logOR_df_obs),
     pval_logOR_wald = 2*pt(abs(logOR_wald),logOR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add pooled CI
+  mutate(
+    OR = exp(logOR_wald),
+    OR_ci_lower = exp(logOR_wald - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
+    OR_ci_upper = exp(logOR_wald + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  )
 
 kable(sel_lr,"html") %>%
   kable_styling("striped") %>%
@@ -285,7 +306,13 @@ mansel_lr %<>%
     logOR_df_adj = 1/(1/logOR_df_old+1/logOR_df_obs),
     pval_logOR_wald = 2*pt(abs(logOR_wald),logOR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add pooled CI
+  mutate(
+    OR = exp(logOR_wald),
+    OR_ci_lower = exp(logOR_wald - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
+    OR_ci_upper = exp(logOR_wald + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  )
 
 kable(mansel_lr,"html") %>%
   kable_styling("striped") %>%
@@ -382,7 +409,13 @@ full_cox %<>%
     logHR_df_adj = 1/(1/logHR_df_old+1/logHR_df_obs),
     pval_logHR_wald = 2*pt(abs(logHR_wald),logHR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add 95% CI
+  mutate(
+    HR = exp(logHR_wald),
+    HR_ci_lower = exp(logHR_wald - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
+    HR_ci_upper = exp(logHR_wald + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  )
 
 kable(full_cox,"html") %>%
   kable_styling("striped") %>%
@@ -409,7 +442,13 @@ sel_cox %<>%
     logHR_df_adj = 1/(1/logHR_df_old+1/logHR_df_obs),
     pval_logHR_wald = 2*pt(abs(logHR_wald),logHR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add 95% CI
+  mutate(
+    HR = exp(logHR_wald),
+    HR_ci_lower = exp(logHR_wald - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
+    HR_ci_upper = exp(logHR_wald + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  )
 
 kable(sel_cox,"html") %>%
   kable_styling("striped") %>%
@@ -436,7 +475,13 @@ mansel_cox %<>%
     logHR_df_adj = 1/(1/logHR_df_old+1/logHR_df_obs),
     pval_logHR_wald = 2*pt(abs(logHR_wald),logHR_df_adj,lower.tail=FALSE)
   ) %>%
-  ungroup
+  ungroup %>%
+  # add 95% CI
+  mutate(
+    HR = exp(logHR_wald),
+    HR_ci_lower = exp(logHR_wald - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
+    HR_ci_upper = exp(logHR_wald + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  )
 
 kable(mansel_cox,"html") %>%
   kable_styling("striped") %>%

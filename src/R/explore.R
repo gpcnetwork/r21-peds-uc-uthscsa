@@ -7,7 +7,7 @@ pacman::p_load(tidyverse,
 source_url("https://raw.githubusercontent.com/sxinger/utils/master/plot_util.R")
 source_url("https://raw.githubusercontent.com/sxinger/utils/master/analysis_util.R")
 
-##--------------------------------------------------------------------------------------------------------------------------
+##----load data----
 #aset<-readRDS("C:/repo/R21_PEDS_UC/data/peds_uc_aset.rds") %>%
 aset<-readRDS("./data/peds_uc_aset.rds") %>%
   filter(INDEX_YEAR >= 2010 & INDEX_YEAR <= 2020) %>%
@@ -16,7 +16,7 @@ aset<-readRDS("./data/peds_uc_aset.rds") %>%
 denom<-aset %>% group_by(INDEX_YEAR) %>%
   summarise(NN_YR = length(unique(PATID)),.groups = "drop")
 
-##-- first treatment type distribution --------------------------------------------------------------------------
+##----first treatment type distribution----
 endpt<-aset %>% 
   select(PATID,INDEX_YEAR,mesalazine,corticosteroids,immunomodulator, biologics, colectomy) %>%
   mutate(standard = pmin(mesalazine,corticosteroids,na.rm=T)) %>%
@@ -62,7 +62,7 @@ ggplot(endpt_summ2 %<>%
   facet_wrap(~var,ncol=3)
 
 
-##-- time-to-first-treatment distribution --------------------------------------------------------------
+##----time-to-first-treatment distribution----
 aset %<>%
   mutate(trt1_time = pmin(time1,time2,time3,time4,time5,na.rm=T)*!is.na(trt1))
 
@@ -77,8 +77,7 @@ ggplot(aset %>% filter(!is.na(trt1)&trt1_time<=365),
   theme(text = element_text(face="bold"))
   
 
-
-##---- missing rates -------------------------------------------------------------------
+##----missing rates----
 var_ind<-c(
    "BMI_ind"
   ,"hemoglobin_ind"
@@ -118,14 +117,52 @@ ggplot(df %<>%
   facet_wrap(~var,ncol=3)
 
 
-##-- keep those started with standard treatment ------------------------------------------------------------------------------------
+##----keep those started with standard treatment-----
+# excld: without observation of recieving treatments
+aset %>% filter(is.na(trt1)) %>% nrow(.)
+# 844
+
+# excld: not start with standard treatments
+aset %>% filter(trt1 %in% c("biologics","colectomy","immunomodulator")) %>% nrow(.)
+# 266
+
+# eligible cohort size
 aset %<>%
   mutate(AGE_AT_INDEX_12Y = as.numeric(AGE_AT_INDEX>=12)) %>%
   filter(trt1 %in% c("standard","biologics","immunomodulator")) %>% 
   filter(time6>=0) %>%
   filter(trt1 %in% c("standard"))
+N<-nrow(aset)
 
-## -----------------------------------------------------------------------------------------------------------
+# IQR
+aset %>% group_by(status6) %>% 
+  summarise(
+    n = length(unique(PATID)),
+    p = n/N,
+    med = median(time6), 
+    q1 = quantile(time6,0.25), 
+    q3 = quantile(time6,0.75)   
+  )
+
+aset %>% filter(status6==1&status1==1) %>%
+  summarise(
+    n = length(unique(PATID)),
+    p = n/N,
+    med = median(time6), 
+    q1 = quantile(time6,0.25), 
+    q3 = quantile(time6,0.75)   
+  )
+
+aset %>% filter(status6==1&(status3==1|status5==1)&status1==0) %>%
+  summarise(
+    n = length(unique(PATID)),
+    p = n/N,
+    med = median(time6), 
+    q1 = quantile(time6,0.25), 
+    q3 = quantile(time6,0.75)   
+  )
+  
+##-----------------------------------------------------------------------------------------------------------
 summary(aset %>% dplyr::select(time_idx2std))
 
 aset %>% filter(status1==1) %>% nrow()
