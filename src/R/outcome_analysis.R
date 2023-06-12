@@ -127,18 +127,24 @@ for(var in var_lst){
     ) %>%
     # add confidence intervals
     mutate(
-      OR = exp(logOR_m),
+      OR = round(exp(logOR_m),3),
       OR_ci_lower = exp(logOR_m - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
       OR_ci_upper = exp(logOR_m + qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
-      HR = exp(logOR_m),
-      HR_ci_lower = exp(logOR_m - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
-      HR_ci_upper = exp(logOR_m + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+      HR = round(exp(logHR_m),3),
+      HR_ci_lower = exp(logHR_m - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
+      HR_ci_upper = exp(logHR_m + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
     )
 
   uni_coef_df %<>% 
     bind_rows(coef_combine)
 }
 
+uni_coef_df %<>%
+  select(
+    var,
+    OR, OR_ci_lower, OR_ci_upper, pval_logOR_wald,
+    HR, HR_ci_lower, HR_ci_upper, pval_logHR_wald
+  )
 kable(uni_coef_df,"html") %>%
   kable_styling("striped") %>%
   save_kable(paste0("./results/pat",nrow(aset_imputed),"_escalate_imputed_uni.pdf"))
@@ -246,6 +252,9 @@ full_lr %<>%
     OR = exp(logOR_m),
     OR_ci_lower = exp(logOR_m - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
     OR_ci_upper = exp(logOR_m + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  ) %>%
+  select(
+    var,OR, OR_ci_lower, OR_ci_upper, pval_logOR_wald
   )
 
 kable(full_lr,"html") %>%
@@ -279,6 +288,9 @@ sel_lr %<>%
     OR = exp(logOR_m),
     OR_ci_lower = exp(logOR_m - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
     OR_ci_upper = exp(logOR_m + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  ) %>%
+  select(
+    var,OR, OR_ci_lower, OR_ci_upper, pval_logOR_wald
   )
 
 kable(sel_lr,"html") %>%
@@ -312,6 +324,9 @@ mansel_lr %<>%
     OR = exp(logOR_m),
     OR_ci_lower = exp(logOR_m - qt(0.975,logOR_df_adj)*sqrt(logOR_vt)),
     OR_ci_upper = exp(logOR_m + qt(0.975,logOR_df_adj)*sqrt(logOR_vt))
+  ) %>%
+  select(
+    var,OR, OR_ci_lower, OR_ci_upper, pval_logOR_wald
   )
 
 kable(mansel_lr,"html") %>%
@@ -415,6 +430,9 @@ full_cox %<>%
     HR = exp(logHR_m),
     HR_ci_lower = exp(logHR_m - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
     HR_ci_upper = exp(logHR_m + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  ) %>%
+  select(
+    var,HR, HR_ci_lower, HR_ci_upper, pval_logHR_wald
   )
 
 kable(full_cox,"html") %>%
@@ -448,6 +466,9 @@ sel_cox %<>%
     HR = exp(logHR_m),
     HR_ci_lower = exp(logHR_m - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
     HR_ci_upper = exp(logHR_m + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  ) %>%
+  select(
+    var,HR, HR_ci_lower, HR_ci_upper, pval_logHR_wald
   )
 
 kable(sel_cox,"html") %>%
@@ -481,6 +502,9 @@ mansel_cox %<>%
     HR = exp(logHR_m),
     HR_ci_lower = exp(logHR_m - qt(0.975,logHR_df_adj)*sqrt(logHR_vt)),
     HR_ci_upper = exp(logHR_m + qt(0.975,logHR_df_adj)*sqrt(logHR_vt))
+  ) %>%
+  select(
+    var,HR, HR_ci_lower, HR_ci_upper, pval_logHR_wald
   )
 
 kable(mansel_cox,"html") %>%
